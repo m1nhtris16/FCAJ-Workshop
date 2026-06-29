@@ -1,126 +1,114 @@
 ---
 title: "Event 1"
-date: 2024-01-01
+date: 2026-06-13
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
+<!-- {{% notice warning %}}
 ⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+{{% /notice %}} -->
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+# Summary Report: “AWS Meetup: Real Stories to Corporate Culture at Multinational Corporations & Cloud/DevOps Career Orientation”
 
 ### Event Objectives
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+- Equip 3rd and 4th-year technology students with mindsets for a volatile recruitment market and a capability development roadmap.
+- Share a realistic picture of Data Analytics work and decode the operational culture at multinational corporations (MNCs).
+- Correctly define the essence of a DevOps Engineer role, market demand trends, and the core learning roadmap.
+- Spread the spirit of learning and personal growth journey synthesis from the student community to professional partners.
 
 ### Speakers
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- **Mr. Dat Pham** – Data Analytics Engineer
+- **Mr. Cuong Nguyen** – Process Engineer
+- **Mr. Trong H. Truong** – DevOps Engineer @ Endava Vietnam
+- **Mr. Danh Hoang Hieu Nghi** – AI Engineer, AWS Community Builder, AWS Student Builder Group Leader
+- **Mr. Dinh Trung Kien** - Lead Developer at startup
+- **Mr. Nguyen Minh Tho** - Student
 
 ### Key Highlights
 
-#### Identifying the drawbacks of legacy application architecture
+#### Real-world Work and Essential Skills of a Data Analytics Engineer
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+- The actual work of a Data Analytics Engineer varies depending on the industry domain, business model, and the department they support.
+- At Kamereo: Data Engineers focus on building daily/weekly/monthly/quarterly reports to track operational performance, designing dashboards to manage data trends, detecting anomalies, and collaborating across departments to solve arising problems.
+- At Colgate-Palmolive: Directly participate in data projects involving machinery, operations, and IoT devices in factories to discover cost-optimization opportunities and enhance long-term operational efficiency.
+- Four core skills required include: Critical thinking, Communication, Data storytelling, and Problem solving.
 
-#### Transitioning to modern application architecture – Microservices
+#### Career Development Mindset and Standard Recruitment Roadmap at MNCs
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+- 5-stage personal competency development model: Follower (Executor/New Junior) → Learner (Active learner/Asks deep questions) → Problem Solver (Solves complex business problems) → System Thinker (Sees the big picture/Broad view) → Super Star (Leader/Builds strategic vision).
+- 4-step standard recruitment process at MNCs: Screening & Initial Interview (ATS sweeps CVs, English conversation with the Recruiter) → Capability Test (Logical thinking, algorithm, or Situation Test) → Technical Interview (Working with Tech Lead/Manager via the STAR model) → Cultural Fit (Assessing alignment of core values with senior executives).
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+#### Decoding Corporate Culture, Asian Lessons & the "Right Work" Philosophy
 
-#### Domain-Driven Design (DDD)
+- Corporate culture is the way of thinking, living, and working of each individual within an organization, exemplified by the "No-Blame Post-Mortem" culture in Tech (focusing on systemic causes instead of personal blame) and the "Caring & Inclusive" culture in FMCG (putting people at the center).
+- Asian Lessons: The spirit of learning and standard-setting from Japan with the "Wakon Yosai" (Japanese spirit, Western techniques) mindset through the Toyota Production System (TPS); and South Korea with the Miracle on the Han River, concentrating resources on building export-oriented Chaebols that strictly comply with international standards.
+- Upgrading the tech game: A strong shift from a "Can do" mindset to a rigorous "DOING IT RIGHT TO STANDARDS" to protect digital assets and national data sovereignty through international certifications like ISO 27001, SOC 2, and GDPR.
+- The "Right Work" Philosophy: Summarizing the spirit of shoulder-carrying the nation's digital lifeline through three pillars: Being a Human (fulfillment), Being a Professional (purpose), and Being a Citizen (community & legacy).
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+#### The Essence of DevOps and Tech Talent Trends in Vietnam
 
-#### Event-Driven Architecture
+- Market statistics (2016-2025) show that software engineering roles like AI/ML, Data, Cloud, Security, and DevOps Engineers enjoy outstanding recruitment demand and salary growth across all experience levels.
+- DevOps is not merely about writing CI/CD pipelines, doing Docker/Kubernetes, or configuring Cloud; the actual scope of work depends heavily on the project scale and business context (including on-call rotation, troubleshooting, incident handling, and cloud infrastructure cost optimization).
+- An effective DevOps learning roadmap starts with strong fundamentals (Linux, Networking, Python/Golang, Git, Containers) and a deep understanding of how applications operate, rather than just copying commands.
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+#### The Journey from "First Cloud AI Journey" to "AWS Partner"
 
-#### Compute Evolution
+- An 8-step comprehensive development roadmap to elevate personal capacity and spread value: 1. Student Curiosity → 2. First Cloud Journey (Right environment) → 3. Workshop & Community (Learning from others) → 4. Hands-on Labs (Learning by doing) → 5. School Projects (Real-world application) → 6. Portfolio (Demonstrating capability) → 7. AWS Partner (Solving real-world problems) → 8. Share Back (Helping the next generation).
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+#### Designing a Scalable URL Shortening Service on AWS
 
-#### Amazon Q Developer
-
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+- **Core Architectural Objectives**: Focus on engineering a system capable of handling high read throughput (redirects)[cite: 1], achieving ultra-low link redirection latency, and optimizing storage cost efficiency under volatile peak traffic.
+- **Serverless Compute Layer**: Utilizing **Amazon API Gateway** and **AWS Lambda** to process incoming short URL translation requests dynamically, completely eliminating traditional server management and scaling overhead.
+- **High-Performance Storage Strategy**: Leveraging **Amazon DynamoDB** as a fast, distributed NoSQL key-value store to guarantee single-digit millisecond lookup times and seamless horizontal partitioning as the mapping database expands.
+- **Edge Acceleration & Caching**: Implementing **Amazon CloudFront** edge caching and **Amazon ElastiCache (Redis)** to cache high-frequency "hot" URLs closer to the users, drastically reducing direct database queries and backend compute workload.
 
 ### Key Takeaways
 
-#### Design Mindset
+#### Orientation and Mindset (Design Mindset)
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+- **System-first approach**: Always approach problems with system thinking (System Thinker), understanding the big picture and cross-connections instead of just fixing checklist tasks.
+- Always ask "Why" before finding out "How" to correctly identify the subject and essence of the problem.
+- Deeply understand the values of corporate culture (No-blame, Caring) and the "Right Work" philosophy to transform the professional mindset into a spirit of decent technology service.
 
-#### Technical Architecture
+#### Technical Knowledge & Strategy (Technical Architecture)
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
+- **Fundamentals stay**: Technology tools constantly change over time, but core foundational knowledge remains sustainable.
+- Upgrade mindsets and workflows from just "getting things done" to "DOING IT RIGHT TO STANDARDS" adhering to strict international compliance standards (ISO 27001, SOC 2, GDPR, etc.).
+- Leverage Artificial Intelligence (AI) intelligently to optimize personal capacity, never abuse AI to turn off active thinking.
 
 #### Modernization Strategy
 
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
+- **Phased personal model**: Follow a clear growth roadmap, focusing on upgrading practical capabilities through milestones (Follower -> Learner -> Problem Solver) rather than rushing for specific titles.
+- Synchronously combine traditional physical supply chains and modern digital supply chains to fully protect the digital assets of organizations and the nation.
 
 ### Applying to Work
 
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
+- **Apply the personal capacity advancement roadmap**: Self-position current level, actively ask deep questions to learn fast, and accumulate practical experience from predecessors.
+- **Practice supplementary soft skills**: Apply critical thinking and data storytelling when building data dashboards for school projects.
+- **Strengthen core knowledge**: Focus heavily on Linux, Networking, Git, and Containers (Docker) to prepare a solid baseline for the Cloud/DevOps roadmap.
+- **Actively participate in community activities**: Execute real-world hands-on labs, complete personal portfolios, and join tech networks like the AWS Student Builder Group to connect, learn, and prepare for the "Share Back" phase.
 
 ### Event Experience
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+Attending the meetup on June 13, 2026 was extremely valuable, giving me a comprehensive view of modernizing individual capacity and corporate understanding using advanced methods and tools. Key experiences included:
 
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
+#### Learning from Experienced, Hands-on Engineers
+- Speakers from diverse sectors (Data, Process, DevOps, AI) representing major organizations shared invaluable **practical lessons**.  
+- Through vivid examples, I gained a realistic understanding of the daily workflows of Data Analytics Engineers and DevOps Engineers in real business environments.  
 
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
+#### Gaining Deep Insights into Culture and Professional Philosophy
+- The meetup clearly decoded the concept of modern corporate culture (such as No-Blame Post-Mortem, Caring & Inclusive) and the deeply humanistic "Right Work" philosophy.  
+- This reshaped my mindset, making me more aware of my responsibilities toward the community and the growth of the nation's digital lifeline.  
 
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
+#### Clearly Shaping the Future Development Roadmap
+- Caught up with actual market demand trends for tech talent and specific salary scales in Vietnam today.  
+- Absorbed a clear 8-step growth roadmap, evolving from initial student curiosity into a professional partner within the cloud ecosystem.  
 
 #### Some event photos
-*Add your event photos here*  
+*Add your event photos here*
 
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+<!-- > Overall, the meetup provided not only practical technical knowledge about Data, Cloud, and DevOps but also profoundly reshaped my mindset regarding career development, corporate culture, and national digital responsibility. -->
