@@ -233,4 +233,6 @@ Combining Serverless WebSockets with fully managed Pub/Sub capabilities from AWS
 
 ---
 **Original Article Link:**  
-[AWS Mobile Blog - Building Real-Time Apps with AWS AppSync Events WebSocket Publishing](https://aws.amazon.com/blogs/mobile/building-real-time-apps-with-aws-appsync-events-websocket-publishing/?content_source=fb&fb_content_id=Q9-wBQFwx5Yd66n6jtrlxpOWP3d7Ai1Z7Qhlr_NhxwMZQM8H3rgdqa3L5yjLiJ_zJw&channel_type=fb&fbclid=IwY2xjawTQRshhZmRrCVJvUEdfVmNxaXBkb2YFZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHopepW3Rg8DlwlNQTVRRSIliLvuErLGNkjdiOoVSIM-HwlueXudnHeYSKZoQ_aem_exW5yGY1VG2nNo6i6_eNQw)
+[AWS Mobile Blog - Building Real-Time Apps with AWS AppSync Events WebSocket Publishing](https://aws.amazon.com/blogs/mobile/building-real-time-apps-with-aws-appsync-events-websocket-publishing/?content_source=fb&fb_content_id=Q9-wBQFwx5Yd66n6jtrlxpOWP3d7Ai1Z7Qhlr_NhxwMZQM8H3rgdqa3L5yjLiJ_zJw&channel_type=fb&fbclid=IwY2xjawTQRshhZmRrCVJvUEdfVmNxaXBkb2YFZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHopepW3Rg8DlwlNQTVRRSIliLvuErLGNkjdiOoVSIM-HwlueXudnHeYSKZoQ_aem_exW5yGY1VG2nNo6i6_eNQw)  
+**Facebook Post Link (AWS Study Group FCJ):**  
+[AWS Study Group FCJ - Blog 2 Post](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2222081178556842)

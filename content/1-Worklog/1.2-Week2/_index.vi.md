@@ -9,27 +9,23 @@ pre: " <b> 1.2. </b> "
 ⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
 {{% /notice %}} -->
 
+### Mục tiêu tuần 2 (22/06/2026 – 28/06/2026):
+* Nắm vững các thành phần bảo mật AWS IAM Roles và hoàn thiện nguyên tắc phân quyền tối thiểu (Least Privilege Access) cho hệ thống **CodExecute**.
+* Nghiên cứu và triển khai hàng chờ bất đồng bộ **Amazon SQS** (`Submissions Queue`) làm Buffer chống nghẽn hệ thống khi có đợt nộp bài đột biến.
+* Tìm hiểu và cấu hình **Amazon API Gateway** (HTTP API) và **Amazon CloudFront CDN Distribution** cho ứng dụng React Frontend.
 
-### Mục tiêu tuần 2:
-
-* Nắm vững các dịch vụ tính toán cốt lõi của AWS, tập trung vào khả năng sẵn sàng cao và mở rộng quy mô (Elastic Load Balancing - ELB và Auto Scaling Groups - ASG).
-* Hiểu các khái niệm cơ bản về Amazon S3 (Simple Storage Service), các lớp lưu trữ (storage classes), cơ chế bảo mật và quản lý vòng đời (lifecycle management).
-* Tìm hiểu các loại lưu trữ khối EBS (Elastic Block Store) và quản lý volume.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+### Các công việc triển khai trong tuần:
+| Thứ | Công việc chi tiết | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu về các loại Elastic Load Balancing (ELB) bao gồm ALB, NLB, GLB <br> - Nắm rõ cơ chế hoạt động của listener, routing rules, target groups và health checks | 22/06/2026 | 22/06/2026 | [Xây dựng ứng dụng web độ sẵn sàng cao](https://docs.aws.amazon.com/elasticloadbalancing/) |
-| 3 | - Học về Auto Scaling Groups (ASG) và Launch Templates <br> - Cấu hình các chính sách mở rộng (Target Tracking, Step Scaling) | 23/06/2026 | 23/06/2026 | [Mở rộng quy mô ứng dụng với Auto Scaling](https://000006.awsstudygroup.com/) |
-| 4 | - Tìm hiểu về các khái niệm S3: buckets, keys, bảo mật (Bucket Policies, ACLs) <br> - Nghiên cứu các lớp lưu trữ S3 (S3 Storage Classes) và mã hóa dữ liệu (SSE-S3, SSE-KMS) | 24/06/2026 | 24/06/2026 | [Lưu trữ Website tĩnh với Amazon S3](https://000057.awsstudygroup.com/) |
-| 5 | - Khám phá các tính năng nâng cao của S3 (Versioning, Lifecycle Rules, Object Lock) <br> - Nghiên cứu các loại ổ đĩa EBS (gp3, io2) và EBS Snapshots | 25/06/2026 | 25/06/2026 | [Bảo mật S3 - Best Practices](https://000069.awsstudygroup.com/) <br> [Các loại ổ đĩa EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) |
-| 6 | - **Thực hành:** <br> &emsp; + Tạo một S3 bucket bật versioning, thiết lập vòng đời (lifecycle rules) để chuyển tiếp dữ liệu sang Glacier <br> &emsp; + Thiết lập Launch Template, Target Group, ALB và Auto Scaling Group để kiểm thử tính sẵn sàng cao | 26/06/2026 | 26/06/2026 | [Xây dựng ứng dụng web độ sẵn sàng cao](https://000101.awsstudygroup.comhttps://docs.aws.amazon.com/elasticloadbalancing/) <br> [Lưu trữ Website tĩnh với Amazon S3](https://000057.awsstudygroup.com/) |
-
+| 2 | - **Bảo mật IAM Roles CodExecute:** Phân tích các quyền truy cập tối thiểu giữa các dịch vụ. <br> - Viết IAM Policies dạng JSON phân quyền cho Lambda API, Lambda Worker, S3 và DynamoDB mà không dùng cặp chìa khóa Access Keys tĩnh. | 22/06/2026 | 22/06/2026 | [Quản lý truy cập IAM](https://000002.awsstudygroup.com/) <br> [IAM Policies Developer Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/) |
+| 3 | - **Hàng chờ Bất đồng bộ Amazon SQS:** Học nguyên lý Buffer chống nghẽn cho bài toán nộp bài tập trung trong các kỳ thi. <br> - Khởi tạo `Submissions Queue` trên Amazon SQS, cấu hình Long Polling (`ReceiveMessageWaitTimeSeconds = 20`) giúp tiết kiệm 90% chi phí API. | 23/06/2026 | 23/06/2026 | [Amazon SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html) |
+| 4 | - **Cơ chế Failover Dead-Letter Queue (DLQ):** Cấu hình Amazon SQS Dead-Letter Queue để lưu giữ các bài nộp chấm lỗi quá 3 lần, đảm bảo không mất mát bài nộp của người dùng khi worker gặp sự cố. | 24/06/2026 | 24/06/2026 | [SQS Dead-Letter Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html) |
+| 5 | - **Cổng vào Amazon API Gateway & CDN CloudFront:** Cấu hình API Gateway HTTP API (tiết kiệm 70% chi phí so với REST API), tạo routes xác thực JWT. <br> - Cấu hình CloudFront CDN phân phối ứng dụng React từ S3, điều hướng `/api/*` tới API Gateway. | 25/06/2026 | 25/06/2026 | [Amazon API Gateway Docs](https://docs.aws.amazon.com/apigateway/) <br> [Amazon CloudFront Docs](https://docs.aws.amazon.com/cloudfront/) |
+| 6 | - **Thực hành & Hoàn thiện Phase 1:** Triển khai thành công cụm SQS + DLQ + IAM Roles + CloudFront CDN lên môi trường AWS bằng kịch bản SAM Template. | 26/06/2026 | 26/06/2026 |  |
 
 ### Kết quả đạt được tuần 2:
-
-* **Tính sẵn sàng cao & Cân bằng tải**: Nắm vững các khái niệm ELB (Application Load Balancer), cấu hình thành công target groups và health checks để định tuyến lưu lượng truy cập hiệu quả giữa các EC2 instances.
-* **Tự động mở rộng quy mô**: Hiểu rõ cơ chế hoạt động của Auto Scaling Groups (ASG) kết hợp với Launch Templates để tự động điều chỉnh số lượng EC2 instances dựa trên tải thực tế hoặc mức độ sử dụng tài nguyên.
-* **Lưu trữ đối tượng mở rộng**: Đạt được sự hiểu biết sâu sắc về Amazon S3, bao gồm phân quyền bucket (Bucket Policies, block public access), mã hóa dữ liệu và các lớp lưu trữ phù hợp để tối ưu chi phí.
-* **Quản lý vòng đời lưu trữ & Ổ đĩa khối**: Tạo thành công lifecycle rules trên Amazon S3 để tự động tối ưu hóa chi phí lưu trữ, nghiên cứu sự khác biệt giữa các loại EBS volumes (gp3, io2) để chọn lựa cấu hình tối ưu.
-* **Kỹ năng thực hành**: Triển khai thành công mô hình hạ tầng sẵn sàng cao gồm ALB và ASG tự động co giãn EC2 instances qua nhiều Availability Zones (AZs), đồng thời cấu hình thành công S3 bucket bật versioning và chính sách lưu trữ Glacier.
+* **Bảo mật Chuẩn Zero-Trust với IAM Roles:** Đã gán thành công các IAM Roles chuẩn phân quyền tối thiểu cho Lambda API và Lambda Worker; loại bỏ hoàn toàn nguy cơ rò rỉ secret key trên nguồn code.
+* **Xây dựng Hàng chờ SQS Buffer Chống Nghẽn:** Khởi tạo thành công Amazon SQS `Submissions Queue` có khả năng điều tiết lưu lượng nộp bài hàng nghìn bài nộp/phút, áp dụng Long Polling giúp giảm 90% chi phí yêu cầu SQS API rỗng.
+* **Đảm bảo Không Mất Mát Bài Nộp (Zero Data Loss):** Thiết lập cơ chế Dead-Letter Queue (DLQ) tự động bắt các message chấm bài bị lỗi 3 lần liên tiếp để kỹ sư xử lý lại, đảm bảo 100% độ tin cậy dữ liệu.
+* **Cấu hình Cổng vào API Gateway & CloudFront CDN Global:** Triển khai thành công API Gateway HTTP API làm cổng duy nhất xác thực JWT Token, tích hợp với CloudFront CDN phân phối nội dung tĩnh ở vùng biên với độ trễ siêu thấp và tự động bật bảo vệ DDoS với AWS Shield.
+* **Hoàn Thành 100% Phase 1 Dự Án CodExecute:** Toàn bộ hạ tầng cốt lõi (VPC, S3, DynamoDB, SQS, IAM, CloudFront, API Gateway) đã sẵn sàng hoạt động trên AWS Dev environment theo chuẩn AWS Well-Architected.

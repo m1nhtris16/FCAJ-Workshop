@@ -109,6 +109,8 @@ Tham gia buổi meetup vào ngày 13 tháng 06 năm 2026 là một trải nghi�
 - Tiếp thu lộ trình phát triển 8 bước rõ ràng, tiến hóa từ sự tò mò ban đầu của sinh viên để trở thành một đối tác chuyên nghiệp trong hệ sinh thái đám mây.
 
 #### Một số hình ảnh khi tham gia sự kiện
-*Thêm các hình ảnh của các bạn tại đây*
+
+![Hình ảnh minh chứng sự kiện 1](/images/event1_evidence1.jpg)
+*Hình ảnh tham gia sự kiện AWS Meetup*
 
 <!-- > Nhìn chung, buổi meetup không chỉ cung cấp các kiến thức kỹ thuật thực tế về Data, Cloud và DevOps mà còn định hình lại một cách sâu sắc tư duy của tôi về phát triển sự nghiệp, văn hóa doanh nghiệp và trách nhiệm số của quốc gia. -->

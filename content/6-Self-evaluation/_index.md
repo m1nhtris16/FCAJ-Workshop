@@ -1,39 +1,32 @@
 ---
-title: "Self-Assessment"
-date: 2024-01-01
+title: "Self-evaluation"
+date: 2026-07-26
 weight: 6
 chapter: false
 pre: " <b> 6. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+<!-- {{% notice warning %}}
+⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** for your report, including this warning.
+{{% /notice %}} -->
 
-During my internship at **[Company/Organization Name]** from **[start date]** to **[end date]**, I had the opportunity to learn, practice, and apply the knowledge acquired in school to a real-world working environment.  
-I participated in **[briefly describe the main project or task]**, through which I improved my skills in **[list skills: programming, analysis, reporting, communication, etc.]**.  
+Throughout the internship program and execution of AWS Workshop projects, I have actively acquired technical knowledge, applied core concepts to practical scenarios, and honed my professional working skills. Below is my self-evaluation categorized by key criteria:
 
-In terms of work ethic, I always strived to complete tasks well, complied with workplace regulations, and actively engaged with colleagues to improve work efficiency.
+### Evaluation Matrix by Criteria
 
-To objectively reflect on my internship period, I would like to evaluate myself based on the following criteria:
+| No. | Criteria | Rating | Detailed Comments & Evidence |
+| :---: | :--- | :---: | :--- |
+| 1 | **Technical Knowledge** | **Good** | Solid understanding of core AWS Cloud Services (EC2, S3, IAM, VPC, CloudWatch, Lambda, VPC Endpoints,...). Deep grasp of Microservices architecture, Event-Driven Architecture, SLA & Monitoring, and Security Best Practices applied directly to real-world workshop projects and blog posts. |
+| 2 | **Ability to Learn** | **Good** | Proactively learned and adopted new technologies (Amazon Bedrock, AWS Security Agent, IaC Terraform,...). Proficient at reading English technical documentation, quickly incorporating feedback from mentors, and troubleshooting lab errors independently. |
+| 3 | **Proactiveness** | **Good** | Independently researched AWS Documentation, actively joined community Meetups/Workshops, took ownership of tasks, and customized lab architectures without waiting for step-by-step instructions. |
+| 4 | **Discipline** | **Good** | Strictly adhered to work logs, internal policies, weekly report submissions, and project milestones on time with high quality. |
+| 5 | **Communication** | **Fair** | Clear and structured expression of technical ideas and progress via Markdown reports and Blog posts. Continually improving verbal communication and public presentation skills. |
+| 6 | **Teamwork** | **Good** | Collaborated effectively with team members, ready to assist peers, share learning resources, and foster a supportive environment. |
+| 7 | **Problem Solving** | **Good** | Strong Root Cause Analysis (RCA) when troubleshooting technical issues (e.g., IAM Policy conflicts, S3 Endpoint Access Denied, DB connection drops). Applied structured debugging methodologies to deliver long-term solutions. |
+| 8 | **Contribution to Project** | **Good** | Built comprehensive workshop documentations, expanded security and monitoring test cases beyond standard templates, authored high-quality blog posts, and successfully met all program objectives. |
 
-| No. | Criteria                            | Description                                                                                      | Good | Fair | Average |
-| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | ---- | ---- | ------- |
-| 1   | **Professional knowledge & skills** | Understanding of the field, applying knowledge in practice, proficiency with tools, work quality | ✅    | ☐    | ☐       |
-| 2   | **Ability to learn**                | Ability to absorb new knowledge and learn quickly                                                | ☐    | ✅    | ☐       |
-| 3   | **Proactiveness**                   | Taking initiative, seeking out tasks without waiting for instructions                            | ✅    | ☐    | ☐       |
-| 4   | **Sense of responsibility**         | Completing tasks on time and ensuring quality                                                    | ✅    | ☐    | ☐       |
-| 5   | **Discipline**                      | Adhering to schedules, rules, and work processes                                                 | ☐    | ☐    | ✅       |
-| 6   | **Progressive mindset**             | Willingness to receive feedback and improve oneself                                              | ☐    | ✅    | ☐       |
-| 7   | **Communication**                   | Presenting ideas and reporting work clearly                                                      | ☐    | ✅    | ☐       |
-| 8   | **Teamwork**                        | Working effectively with colleagues and participating in teams                                   | ✅    | ☐    | ☐       |
-| 9   | **Professional conduct**            | Respecting colleagues, partners, and the work environment                                        | ✅    | ☐    | ☐       |
-| 10  | **Problem-solving skills**          | Identifying problems, proposing solutions, and showing creativity                                | ☐    | ✅    | ☐       |
-| 11  | **Contribution to project/team**    | Work effectiveness, innovative ideas, recognition from the team                                  | ✅    | ☐    | ☐       |
-| 12  | **Overall**                         | General evaluation of the entire internship period                                               | ✅    | ☐    | ☐       |
+### Areas for Improvement & Action Plan
 
-### Needs Improvement
-
-* Strengthen discipline and strictly comply with the rules and regulations of the company or any organization  
-* Improve problem-solving thinking  
-* Enhance communication skills in both daily interactions and professional contexts, including handling situations effectively
+- **Enhance Infrastructure Automation**: Master Infrastructure as Code (IaC) with Terraform and AWS CDK to eliminate manual configurations.
+- **Strengthen Verbal Presentation**: Actively participate in team discussions and presentations to build confidence in technical communication.
+- **Deepen Cloud Security & DevOps Knowledge**: Explore DevSecOps pipeline integrations and AI-assisted security tools in CI/CD workflows.

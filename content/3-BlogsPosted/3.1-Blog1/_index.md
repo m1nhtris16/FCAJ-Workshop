@@ -83,4 +83,6 @@ By incorporating Offline-First and Optimistic UI principles into the architectur
 
 ---
 **Original Article Link:**  
-[AWS Mobile Blog - Offline Caching with AWS Amplify, TanStack, AppSync, and MongoDB Atlas](https://aws.amazon.com/blogs/mobile/offline-caching-with-aws-amplify-tanstack-appsync-and-mongodb-atlas/?fbclid=IwY2xjawTQRbBwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMXA4TTZOYVBMTTBOczdNTTBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEesu05YrTOVk9zmUd67tN6XtZMZw5fg4SRk9wIz4mZ3UxFB2eo7Cggm8k9i6o_aem_kteT-zlGgPrmMNZY1cqaiQ)
+[AWS Mobile Blog - Offline Caching with AWS Amplify, TanStack, AppSync, and MongoDB Atlas](https://aws.amazon.com/blogs/mobile/offline-caching-with-aws-amplify-tanstack-appsync-and-mongodb-atlas/?fbclid=IwY2xjawTQRbBwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMXA4TTZOYVBMTTBOczdNTTBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEesu05YrTOVk9zmUd67tN6XtZMZw5fg4SRk9wIz4mZ3UxFB2eo7Cggm8k9i6o_aem_kteT-zlGgPrmMNZY1cqaiQ)  
+**Facebook Post Link (AWS Study Group FCJ):**  
+[AWS Study Group FCJ - Blog 1 Post](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2222075235224103)

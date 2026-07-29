@@ -15,7 +15,7 @@ chapter: false
 
 &emsp; **Trường:** Trường Đại học Bách khoa - ĐHQG HCM
 
-&emsp; **Ngành:** Công nghệ thông tin
+&emsp; **Ngành:** Khoa học máy tính
 
 <!-- &emsp; **Lớp:** AWS082025 -->
 
@@ -23,7 +23,7 @@ chapter: false
 
 &emsp; **Vị trí thực tập:** Workforce Bootcamp - First Cloud AI Journey
 
-&emsp; **Thời gian thực tập:** Từ 15/06/2026 đến 15/09/2026
+&emsp; **Thời gian thực tập:** Từ 15/06/2026 đến 14/08/2026
 
 ![Ảnh đại diện của bạn](/images/avatar.jpg)
 

@@ -1,33 +1,37 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-06-15
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
-{{% notice warning %}}
+<!-- {{% notice warning %}}
 ⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+{{% /notice %}} -->
 
 
-# Đảm bảo truy cập Hybrid an toàn đến S3 bằng cách sử dụng VPC endpoint
+# HƯỚNG DẪN TRIỂN KHAI DỰ ÁN CODEXECUTE TRÊN AWS
 
 #### Tổng quan
 
-**AWS PrivateLink** cung cấp kết nối riêng tư đến các dịch vụ aws từ VPCs hoặc trung tâm dữ liệu (on-premise) mà không làm lộ lưu lượng truy cập ra ngoài public internet.
+Phần **Workshop** đóng vai trò là cuốn cẩm nang kỹ thuật hướng dẫn chi tiết quy trình **triển khai dự án CodExecute (Hệ thống chấm bài thuật toán tự động)** lên hạ tầng điện toán đám mây **Pure Serverless AWS** từ con số 0.
 
-Trong bài lab này, chúng ta sẽ học cách tạo, cấu hình, và kiểm tra VPC endpoints để cho phép workload của bạn tiếp cận các dịch vụ AWS mà không cần đi qua Internet công cộng.
+Toàn bộ quy trình triển khai được chuẩn hóa thành các bước thực hành tự động hóa qua kịch bản Infrastructure as Code (AWS SAM / Terraform Templates), tuân thủ nghiêm ngặt 6 trụ cột thiết kế của **AWS Well-Architected Framework**:
+* **Operational Excellence:** Tự động hóa 100% việc khởi tạo và cập nhật hạ tầng qua kịch bản SAM Templates.
+* **Security:** Mô hình Zero-Trust với IAM Roles phân quyền tối thiểu, VPC Endpoints riêng tư và môi trường Lambda Sandbox rào chắn chống RCE.
+* **Reliability:** Hạ tầng Multi-AZ chịu lỗi, cơ chế đệm SQS Queue và Dead-Letter Queue (DLQ) đảm bảo không mất mát dữ liệu bài nộp.
+* **Performance Efficiency:** Tốc độ phản hồi API $< 200ms$, thời gian chấm bài $< 2.0$ giây nhờ phân phối CDN CloudFront Edge và NoSQL DynamoDB.
+* **Cost Optimization:** Kiến trúc Pure Serverless Event-Driven giúp tối ưu chi phí vận hành chỉ còn **~$15.43 USD/tháng**.
+* **Sustainability:** Tối ưu hóa chu kỳ tính toán của Lambda giúp giảm thiểu tiêu thụ tài nguyên điện năng phần cứng.
 
-Chúng ta sẽ tạo hai loại endpoints để truy cập đến Amazon S3: gateway vpc endpoint và interface vpc endpoint. Hai loại vpc endpoints này mang đến nhiều lợi ích tùy thuộc vào việc bạn truy cập đến S3 từ môi trường cloud hay từ trung tâm dữ liệu (on-premise).
-+ **Gateway** - Tạo gateway endpoint để gửi lưu lượng đến Amazon S3 hoặc DynamoDB using private IP addresses. Bạn điều hướng lưu lượng từ VPC của bạn đến gateway endpoint bằng các bảng định tuyến (route tables)
-+ **Interface** - Tạo interface endpoint để gửi lưu lượng đến các dịch vụ điểm cuối (endpoints) sử dụng Network Load Balancer để phân phối lưu lượng. Lưu lượng dành cho dịch vụ điểm cuối được resolved bằng DNS.
+---
 
-#### Nội dung
+#### Nội dung các bước triển khai (Deployment Roadmap)
 
-1. [Tổng quan về workshop](5.1-Workshop-overview/)
-2. [Chuẩn bị](5.2-Prerequiste/)
-3. [Truy cập đến S3 từ VPC](5.3-S3-vpc/)
-4. [Truy cập đến S3 từ TTDL On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (làm thêm)](5.5-Policy/)
-6. [Dọn dẹp tài nguyên](5.6-Cleanup/)
+1. [Giới thiệu & Tổng quan Triển khai Dự án](5.1-Workshop-overview/)
+2. [Bước 1: Chuẩn bị Môi trường & Khởi tạo Mạng Custom VPC](5.2-Prerequiste/)
+3. [Bước 2: Triển khai Lưu trữ S3, DynamoDB NoSQL & VPC Endpoints](5.3-S3-vpc/)
+4. [Bước 3: Triển khai Serverless API & Hàng chờ Bất đồng bộ SQS Buffer](5.4-S3-onprem/)
+5. [Bước 4: Triển khai Lambda Worker Sandbox & Bảo mật IAM Policies](5.5-Policy/)
+6. [Bước 5: Tối ưu Chi phí, Kiểm thử Load Test & Dọn dẹp Tài nguyên](5.6-Cleanup/)

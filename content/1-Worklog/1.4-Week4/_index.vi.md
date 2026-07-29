@@ -1,59 +1,31 @@
 ---
 title: "Worklog Tuần 4"
-date: 2024-01-01
+date: 2026-07-06
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}}
+<!-- {{% notice warning %}}
 ⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+{{% /notice %}} -->
 
+### Mục tiêu tuần 4 (06/07/2026 – 12/07/2026):
+* Triển khai **Phase 3: Xử Lý Bất Đồng Bộ & Lambda Sandbox** của dự án **CodExecute**.
+* Viết AWS Lambda Worker Runner tiêu thụ tin nhắn nộp bài từ Amazon SQS Queue, biên dịch và thực thi 4 ngôn ngữ (C++, Java, Python, JS).
+* Thiết lập môi trường Sandbox cách ly hoàn toàn trên AWS Lambda, rà soát an ninh bảo mật triệt để chống nguy cơ Remote Code Execution (RCE).
 
-### Mục tiêu tuần 4:
-
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
+### Các công việc triển khai trong tuần:
+| Thứ | Công việc chi tiết | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - **Luồng Đẩy Bài Nộp Bất Đồng Bộ (SQS Job Producer):** Cấu hình Lambda API đẩy payload bài nộp (code người dùng, language, problem_id) vào Amazon SQS `Submissions Queue` khi nhận request "Submit Code". | 06/07/2026 | 06/07/2026 | [Amazon SQS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/) |
+| 3 | - **Thiết kế AWS Lambda Worker Runner:** Lập trình Lambda Worker tiêu thụ tin nhắn từ SQS, tự động chọn trình biên dịch (GCC 13 cho C++, OpenJDK 21 cho Java, Python 3.12, Node.js 20 cho JS). | 07/07/2026 | 07/07/2026 | [AWS Lambda Execution Environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html) |
+| 4 | - **Thiết lập Sandbox Cách Ly Chống RCE:** Tắt kết nối mạng ngoài (`VPC Network: Disabled / Strict Subnet Groups`), áp dụng giới hạn cứng tài nguyên (RAM 512MB, CPU 1 Core, Execution Timeout 5s, Process Limit 20 pids). | 08/07/2026 | 08/07/2026 | [AWS Lambda Security Best Practices](https://docs.aws.amazon.com/lambda/latest/dg/lambda-security.html) |
+| 5 | - **Xử lý Testcase & Chấm Điểm Tự Động:** Viết logic đọc bộ Testcases (Input/Output text files) từ Amazon S3, so sánh output từng dòng và cập nhật kết quả (Accept, Wrong Answer, TLE, MLE) vào DynamoDB. | 09/07/2026 | 09/07/2026 | [Amazon S3 Developer Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/) |
+| 6 | - **Thực hành & Hoàn thiện Phase 3:** Kiểm thử toàn bộ luồng nộp bài end-to-end: Client → API Gateway → Lambda API → SQS → Lambda Worker Sandbox → S3 Testcases → DynamoDB. | 10/07/2026 | 10/07/2026 |  |
 
 ### Kết quả đạt được tuần 4:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* **Hoàn Thành Luồng Chấm Bài Bất Đồng Bộ:** Thiết lập luồng gửi nhận tin nhắn bất đồng bộ qua SQS giúp hệ thống chấm bài nhận hàng nghìn yêu cầu nộp bài cùng lúc mà không làm quá tải backend.
+* **Xây Dựng Lambda Worker Sandbox Đa Ngôn Ngữ:** Lập trình thành công Lambda Worker thực thi 4 ngôn ngữ lập trình phổ biến (C++, Java, Python, JavaScript) với khả năng tự động phân tích lỗi biên dịch (Compile Errors) và lỗi thực thi (Runtime Errors).
+* **Bảo Mật An Toàn Tuyệt Đối Chống RCE:** Thiết lập môi trường Sandbox cách ly hoàn toàn không có quyền mạng ngoài, giới hạn tài nguyên nghiêm ngặt (Memory 512MB, Timeout 5s), chống lại các nguy cơ Remote Code Execution (RCE) hoặc Fork Bomb phá hoại server.
+* **Tự Động Hóa Chấm Điểm Testcase trên S3:** Đọc và đối sánh dữ liệu bộ Testcase lớn cực nhanh từ Amazon S3, ghi nhận thời gian thực thi (runtime ms) và bộ nhớ tiêu thụ (memory MB) chính xác vào DynamoDB Submissions table.
+* **Hoàn Thành 100% Phase 3 Dự Án CodExecute:** Luồng chấm bài tự động bất đồng bộ trong môi trường Sandbox cách ly đã vận hành hoàn hảo với độ trễ chấm bài < 2.0 giây.

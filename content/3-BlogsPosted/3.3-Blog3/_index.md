@@ -202,5 +202,9 @@ The most impressive aspect of the AWS Amplify AI Kit is its ability to abstract 
 Combining Amplify Gen 2's TypeScript-first approach with Serverless architecture (AppSync, Lambda, DynamoDB) and Generative UI components provides the ultimate blueprint for shipping production-ready AI applications in minutes.
 
 ---
+
 **Original Article Link:**  
-[AWS Mobile Blog - Build Fullstack AI Apps in Minutes with the New Amplify AI Kit](https://aws.amazon.com/blogs/mobile/build-fullstack-ai-apps-in-minutes-with-the-new-amplify-ai-kit/)
+[AWS Mobile Blog - Build Fullstack AI Apps in Minutes with the New Amplify AI Kit](https://aws.amazon.com/blogs/mobile/build-fullstack-ai-apps-in-minutes-with-the-new-amplify-ai-kit/)
+
+**Facebook Community Post:**  
+[AWS Study Group FCJ - Blog 3 Post](https://www.facebook.com/groups/awsstudygroupfcj/posts/2223956578369302)

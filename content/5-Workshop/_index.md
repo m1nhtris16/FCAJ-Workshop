@@ -1,31 +1,37 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-06-15
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+<!-- {{% notice warning %}}
+⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
+{{% /notice %}} -->
+
+
+# CODEXECUTE PROJECT AWS DEPLOYMENT GUIDE
 
 #### Overview
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+The **Workshop** section serves as a step-by-step technical deployment manual for executing and deploying the **CodExecute project (Online Judge System & Automated Algorithm Evaluation Platform)** onto **Pure Serverless AWS** cloud infrastructure from scratch.
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+The entire deployment workflow is standardized using Infrastructure as Code (AWS SAM / Terraform Templates), strictly adhering to the 6 pillars of the **AWS Well-Architected Framework**:
+* **Operational Excellence:** 100% automated infrastructure provisioning and updates via AWS SAM templates.
+* **Security:** Zero-Trust model with Least Privilege IAM Roles, private VPC Endpoints, and hardened Lambda Execution Sandboxes protecting against RCE.
+* **Reliability:** Multi-AZ fault tolerance, Amazon SQS buffering, and Dead-Letter Queue (DLQ) failover guaranteeing zero user data loss.
+* **Performance Efficiency:** API latency $< 200ms$ and submission processing speeds $< 2.0$s powered by CloudFront CDN Edge locations and DynamoDB NoSQL.
+* **Cost Optimization:** Event-Driven Pure Serverless architecture reducing monthly operating budget down to **~$15.43 USD/month**.
+* **Sustainability:** Optimized compute cycles minimizing hardware power consumption.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+---
 
-#### Content
+#### Deployment Roadmap & Modules
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+1. [Introduction & Project Deployment Overview](5.1-Workshop-overview/)
+2. [Step 1: Environment Setup & Custom VPC Network Provisioning](5.2-Prerequiste/)
+3. [Step 2: S3 Storage, DynamoDB NoSQL & VPC Endpoints Deployment](5.3-S3-vpc/)
+4. [Step 3: Serverless API & SQS Buffer Queue Deployment](5.4-S3-onprem/)
+5. [Step 4: Lambda Worker Sandbox & IAM Security Hardening](5.5-Policy/)
+6. [Step 5: Cost Optimization, Load Testing & Resource Cleanup](5.6-Cleanup/)

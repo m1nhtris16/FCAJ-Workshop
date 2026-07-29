@@ -204,5 +204,9 @@ function Chat() {
 Sự kết hợp giữa tư duy TypeScript-first của Amplify Gen 2, kiến trúc Serverless (AppSync, Lambda, DynamoDB) và các thành phần UI thông minh (Generative UI) chính là công thức tối ưu giúp các doanh nghiệp và startup đưa các ứng dụng AI đột phá từ ý tưởng ra thị trường chỉ trong thời gian tính bằng phút.
 
 ---
+
 **Link tài liệu gốc:**  
-[AWS Mobile Blog - Build Fullstack AI Apps in Minutes with the New Amplify AI Kit](https://aws.amazon.com/blogs/mobile/build-fullstack-ai-apps-in-minutes-with-the-new-amplify-ai-kit/)
+[AWS Mobile Blog - Build Fullstack AI Apps in Minutes with the New Amplify AI Kit](https://aws.amazon.com/blogs/mobile/build-fullstack-ai-apps-in-minutes-with-the-new-amplify-ai-kit/)
+
+**Bài viết trên Facebook Community:**  
+[AWS Study Group FCJ - Bài đăng Blog 3](https://www.facebook.com/groups/awsstudygroupfcj/posts/2223956578369302)

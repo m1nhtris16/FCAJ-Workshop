@@ -83,4 +83,6 @@ Bằng cách đưa tư duy Offline-First và Optimistic UI vào thiết kế, �
 
 ---
 **Link tài liệu gốc:**  
-[AWS Mobile Blog - Offline Caching with AWS Amplify, TanStack, AppSync, and MongoDB Atlas](https://aws.amazon.com/blogs/mobile/offline-caching-with-aws-amplify-tanstack-appsync-and-mongodb-atlas/?fbclid=IwY2xjawTQRbBwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMXA4TTZOYVBMTTBOczdNTTBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEesu05YrTOVk9zmUd67tN6XtZMZw5fg4SRk9wIz4mZ3UxFB2eo7Cggm8k9i6o_aem_kteT-zlGgPrmMNZY1cqaiQ)
+[AWS Mobile Blog - Offline Caching with AWS Amplify, TanStack, AppSync, and MongoDB Atlas](https://aws.amazon.com/blogs/mobile/offline-caching-with-aws-amplify-tanstack-appsync-and-mongodb-atlas/?fbclid=IwY2xjawTQRbBwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMXA4TTZOYVBMTTBOczdNTTBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEesu05YrTOVk9zmUd67tN6XtZMZw5fg4SRk9wIz4mZ3UxFB2eo7Cggm8k9i6o_aem_kteT-zlGgPrmMNZY1cqaiQ)  
+**Link bài viết trên Group FCJ:**  
+[AWS Study Group FCJ - Bài viết Blog 1](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2222075235224103)

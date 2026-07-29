@@ -109,6 +109,7 @@ Attending the meetup on June 13, 2026 was extremely valuable, giving me a compre
 - Absorbed a clear 8-step growth roadmap, evolving from initial student curiosity into a professional partner within the cloud ecosystem.  
 
 #### Some event photos
-*Add your event photos here*
+
+![Event 1 Evidence Photo](/images/event1_evidence1.jpg)
 
 <!-- > Overall, the meetup provided not only practical technical knowledge about Data, Cloud, and DevOps but also profoundly reshaped my mindset regarding career development, corporate culture, and national digital responsibility. -->

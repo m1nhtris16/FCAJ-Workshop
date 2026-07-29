@@ -1,58 +1,31 @@
 ---
 title: "Worklog Tuần 6"
-date: 2024-01-01
+date: 2026-07-20
 weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
-{{% notice warning %}}
+<!-- {{% notice warning %}}
 ⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+{{% /notice %}} -->
 
+### Mục tiêu tuần 6 (20/07/2026 – 26/07/2026):
+* Triển khai **Phase 4: Kiểm Thử Chịu Tải & Bảo Mật Hardening** của dự án **CodExecute**.
+* Thực hành bài Workshop 3.2 "SLA & Monitoring", nghiên cứu mô hình 5 tầng Kim tự tháp Giám sát (Monitoring Pyramid).
+* Thực hiện kiểm thử chịu tải (Load Testing với Locust/k6 lên đến 1,000 VUs), cấu hình CloudWatch Alarms gửi thông báo tự động tới Slack/Email và tối ưu hóa chi phí Lambda Compute.
 
-### Mục tiêu tuần 6:
-
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
+### Các công việc triển khai trong tuần:
+| Thứ | Công việc chi tiết | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - **Nghiên cứu Workshop 3.2 SLA & Monitoring:** Học khái niệm SLA, phân tích khoảng cách giữa *Healthy Infrastructure* (CPU/RAM xanh) và *Healthy User Experience* (người dùng đăng nhập/nộp bài thành công). | 20/07/2026 | 20/07/2026 | [AWS Observability & CloudWatch Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html) |
+| 3 | - **Thiết lập Luồng Cảnh Báo CloudWatch (Alerting Flow):** Tạo Custom Metrics (`SubmissionLatency`, `SubmissionErrorRate`, `LoginFailure`), cấu hình CloudWatch Alarms gửi thông báo qua Amazon SNS đến kênh Slack khi tỷ lệ lỗi > 1%. | 21/07/2026 | 21/07/2026 | [CloudWatch Alarms & SNS Alerting Docs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html) |
+| 4 | - **Kiểm Thử Chịu Tải CodExecute (Load Testing 1,000 VUs):** Viết kịch bản kiểm thử chịu tải bằng Locust/k6 giả lập 1,000 người dùng ảo (Virtual Users) đồng thời gửi yêu cầu nộp bài trong các đợt thi cao điểm. | 22/07/2026 | 22/07/2026 | [Locust Load Testing Docs](https://locust.io/) |
+| 5 | - **Tối Ưu Chi Phí AWS Lambda Power Tuning:** Sử dụng công cụ AWS Lambda Power Tuning để tìm mức cấu hình RAM/vCPU tối ưu nhất cho Lambda API & Worker, vừa tăng tốc xử lý vừa giảm chi phí compute. | 23/07/2026 | 23/07/2026 | [AWS Lambda Power Tuning](https://github.com/alexcasalboni/aws-lambda-power-tuning) |
+| 6 | - **Thực hành & Hoàn thiện Phase 4:** Đánh giá chỉ số Load Test đạt SLA cam kết (API Response Latency < 200ms, Submission Evaluation < 2.0s), rà soát bảo mật và khắc phục 100% lỗ hổng High/Critical. | 24/07/2026 | 24/07/2026 | [AWS Performance Efficiency Pillar](https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar/welcome.html) |
 
 ### Kết quả đạt được tuần 6:
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* **Hoàn Thành Bài Workshop 3.2 SLA & Monitoring:** Nắm vững mô hình Tháp Giám Sát 5 tầng, chuyển đổi tư duy từ giám sát hạ tầng sang giám sát trải nghiệm người dùng thực tế.
+* **Tự Động Hóa Luồng Cảnh Báo Tức Thì (CloudWatch → SNS → Slack):** Khởi tạo thành công Custom Metrics và CloudWatch Alarms tự động gửi thông báo đến Slack/Email khi phát hiện số lượng đăng nhập thất bại hoặc lỗi bài nộp tăng bất thường.
+* **Kiểm Thử Chịu Tải Thành Công 1,000 VUs:** Thực hiện Load Test giả lập 1,000 người dùng nộp bài đồng thời; hệ thống Serverless Lambda + SQS tự động mở rộng mượt mà không xảy ra hiện tượng rớt request hay sập hệ thống.
+* **Tối Ưu Hiệu Năng & Chi Phí Tính Toán:** Áp dụng công cụ AWS Lambda Power Tuning tìm được điểm RAM 512MB tối ưu cho Worker, rút ngắn thời gian xử lý bài nộp xuống 800ms và tiết kiệm thêm 25% chi phí compute.
+* **Hoàn Thành 100% Phase 4 Dự Án CodExecute:** Hệ thống CodExecute đạt đầy đủ các chỉ số SLA cam kết và sẵn sàng cho giai đoạn GO-LIVE chính thức.
