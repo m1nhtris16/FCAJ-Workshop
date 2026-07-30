@@ -20,3 +20,6 @@ This blog introduces direct message publishing via WebSocket connections in AWS 
 
 ###  [Blog 3 - BUILD FULLSTACK AI APPS IN MINUTES WITH THE NEW AWS AMPLIFY AI KIT](3.3-Blog3/)
 This blog introduces the AWS Amplify AI Kit, enabling Full-Stack developers to rapidly build Generative AI features (Chatbots, Generative UI, Data Tools) using familiar TypeScript constructs on Serverless infrastructure (AWS AppSync, Lambda, Amazon Bedrock, and DynamoDB).
+
+###  [Blog 4 - REVOLUTIONIZING FAN ENGAGEMENT: BUNDESLIGA GENERATIVE AI-POWERED LIVE COMMENTARY](3.4-Blog4/)
+This blog explores a Generative AI-powered live commentary solution developed by AWS and Sportec Solutions AG for Germany's Bundesliga. It leverages AWS ECS Fargate, Lambda, Amazon Bedrock, AWS AppSync, and DynamoDB to convert raw match data into multi-lingual, personalized live tickers in real time with ultra-low latency.

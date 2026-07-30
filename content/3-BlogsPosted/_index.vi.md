@@ -20,3 +20,6 @@ Blog này giới thiệu tính năng xuất bản thông điệp trực tiếp q
 
 ###  [Blog 3 - XÂY DỰNG ỨNG DỤNG AI FULL-STACK TRONG VỎN VẸN VÀI PHÚT VỚI AWS AMPLIFY AI KIT](3.3-Blog3/)
 Blog này giới thiệu bộ công cụ AWS Amplify AI Kit giúp các lập trình viên Full-Stack xây dựng các tính năng Generative AI (Chatbot, Generative UI, Data Tools) nhanh chóng thông qua ngôn ngữ TypeScript quen thuộc trên hạ tầng Serverless (AWS AppSync, Lambda, Amazon Bedrock và DynamoDB).
+
+###  [Blog 4 - CÁCH MẠNG HÓA TRẢI NGHIỆM TƯƠNG TÁC CỦA NGHƯỜI HÂM MỘ: BÌNH LUẬN TRỰC TIẾP BẰNG GENERATIVE AI CHO BUNDESLIGA](3.4-Blog4/)
+Blog này khám phá giải pháp bình luận trực tiếp tự động bằng Generative AI được AWS phát triển cho giải bóng đá Bundesliga (Đức). Hệ thống sử dụng AWS ECS Fargate, Lambda, Amazon Bedrock, AWS AppSync và DynamoDB để chuyển đổi dữ liệu trận đấu thô thành các tường thuật đa ngôn ngữ, đa phong cách theo thời gian thực với độ trễ cực thấp.
