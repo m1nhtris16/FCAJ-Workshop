@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 5.7.2. </b> "
 ---
 
-# GẮN SQS QUEUE VÀO LAMBDA WORKER (EVENT SOURCE MAPPING)
+
 
 Trong bước này, chúng ta cấu hình **SQS Event Source Mapping** kết nối `codeexecute-submission-queue` với Lambda function `codeexecute-worker`. Mapping này khiến Lambda tự động polling SQS queue và kích hoạt Worker với một batch message mỗi khi có bài nộp mới vào queue.
 

@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 5.8. </b> "
 ---
 
-# MONITORING CODEXECUTE WITH AMAZON CLOUDWATCH
 
 In this section, we document how **Amazon CloudWatch** was used to monitor the CodExecute serverless system — covering Lambda execution logs, SQS queue metrics, and setting up alarms to detect anomalies in the grading pipeline.
 

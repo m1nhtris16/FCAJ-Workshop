@@ -36,15 +36,15 @@ In this section, we will deploy the **CodExecute React Frontend** application on
 
 <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
 
-  <a class="toc-link" href="5.3.1-S3/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.3.1-s3/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">5.3.1</span>
-      <span style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">Deploy Frontend on Amazon S3</span>
+      <span style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">Deploy Frontend to Amazon S3</span>
     </div>
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.3.2-CF/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.3.2-cf/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">5.3.2</span>
       <span style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">Configure Amazon CloudFront &amp; Multi-Origin Routing</span>

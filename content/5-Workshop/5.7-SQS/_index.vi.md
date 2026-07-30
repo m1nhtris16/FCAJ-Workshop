@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 5.7. </b> "
 ---
 
-# THIẾT LẬP AMAZON SQS CHO HÀNG ĐỢI CHẤM BÀI CODEXECUTE
 
 Trong phần này, chúng ta ghi lại quá trình cấu hình **Amazon Simple Queue Service (SQS)** làm bộ đệm bất đồng bộ giữa **Lambda API** (`codeexecute-api`) và **Lambda Worker** (`codeexecute-worker`).
 

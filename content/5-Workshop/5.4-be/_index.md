@@ -36,18 +36,18 @@ In this section, we will package the **CodExecute Backend** services into Contai
 
 <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
 
-  <a class="toc-link" href="5.4.1-ECR/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.4.1-ecr/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">5.4.1</span>
-      <span style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">Create Amazon ECR &amp; Build Docker Images</span>
+      <span style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">Create Amazon ECR &amp; Build Docker Image</span>
     </div>
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.4.2-Lambda/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.4.2-lambda/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">5.4.2</span>
-      <span style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">Create &amp; Configure AWS Lambda on AWS Console</span>
+      <span style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">Instantiate &amp; Configure AWS Lambda on AWS Console</span>
     </div>
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>

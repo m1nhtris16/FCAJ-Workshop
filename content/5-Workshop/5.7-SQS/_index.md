@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 5.7. </b> "
 ---
 
-# SETTING UP AMAZON SQS FOR CODEXECUTE SUBMISSION QUEUE
 
 In this section, we document how **Amazon Simple Queue Service (SQS)** was configured as the asynchronous submission buffer between the **API Lambda** (`codeexecute-api`) and the **Worker Lambda** (`codeexecute-worker`).
 

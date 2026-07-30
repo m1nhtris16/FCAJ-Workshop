@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 5.8. </b> "
 ---
 
-# GIÁM SÁT CODEXECUTE VỚI AMAZON CLOUDWATCH
 
 Trong phần này, chúng ta ghi lại cách **Amazon CloudWatch** được sử dụng để giám sát hệ thống serverless CodExecute — bao gồm log thực thi Lambda, metric SQS queue, và thiết lập alarm để phát hiện bất thường trong pipeline chấm bài.
 

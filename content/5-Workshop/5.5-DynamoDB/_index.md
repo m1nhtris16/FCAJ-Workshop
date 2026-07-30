@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 5.5. </b> "
 ---
 
-# SETTING UP AMAZON DYNAMODB TABLES FOR CODEXECUTE
 
 In this section, we document how all **Amazon DynamoDB** tables for the CodExecute system were provisioned. Rather than creating each table manually through the Console, all tables were created in a single run using the automated Python setup script [`scripts/create_tables.py`](https://github.com/phuvi301/CodExecute/blob/main/be/scripts/create_tables.py) included in the backend codebase.
 

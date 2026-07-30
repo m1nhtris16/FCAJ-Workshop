@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 5.7.1. </b> "
 ---
 
-# TẠO AMAZON SQS SUBMISSION QUEUE
+
 
 Trong bước này, chúng ta tạo **Amazon SQS Standard Queue** (`codeexecute-submission-queue`) làm bộ đệm bất đồng bộ giữa Lambda API và Lambda Worker. Tên queue được ứng dụng tham chiếu qua biến môi trường `SQS_QUEUE_URL` trong `app/core/config.py`.
 

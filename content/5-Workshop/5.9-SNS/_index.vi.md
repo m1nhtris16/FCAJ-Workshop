@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 5.9. </b> "
 ---
 
-# THIẾT LẬP AMAZON SNS & CLOUDWATCH ALARMS CHO CODEXECUTE
 
 Trong phần này, chúng ta ghi lại cách **Amazon Simple Notification Service (SNS)** được cấu hình để gửi cảnh báo email theo thời gian thực khi Lambda function của CodExecute gặp lỗi. SNS đóng vai trò kênh thông báo mà CloudWatch Alarms sử dụng để gửi cảnh báo tới các subscriber.
 

@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 5.7.1. </b> "
 ---
 
-# CREATE THE AMAZON SQS SUBMISSION QUEUE
+
 
 In this step, we create the **Amazon SQS Standard Queue** (`codeexecute-submission-queue`) that acts as the asynchronous buffer between the API Lambda and the Worker Lambda. The queue name is referenced in the application via the environment variable `SQS_QUEUE_URL` in `app/core/config.py`.
 

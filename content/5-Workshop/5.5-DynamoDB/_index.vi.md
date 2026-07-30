@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 5.5. </b> "
 ---
 
-# THIẾT LẬP CÁC BẢNG AMAZON DYNAMODB CHO CODEXECUTE
 
 Trong phần này, chúng ta ghi lại quá trình khởi tạo toàn bộ bảng **Amazon DynamoDB** cho hệ thống CodExecute. Thay vì tạo từng bảng thủ công trên Console, toàn bộ bảng được tạo trong một lần chạy duy nhất bằng script Python tự động [`scripts/create_tables.py`](https://github.com/phuvi301/CodExecute/blob/main/be/scripts/create_tables.py) có sẵn trong mã nguồn backend.
 

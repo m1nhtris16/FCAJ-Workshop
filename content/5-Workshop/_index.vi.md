@@ -41,7 +41,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
 
 <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
 
-  <a class="toc-link" href="5.1-Workshop-overview/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.1-workshop-overview/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 01</span>
       <div>
@@ -52,7 +52,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.2-Prerequiste/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.2-prerequiste/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 02</span>
       <div>
@@ -63,7 +63,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.3-fe/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.3-fe/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 03</span>
       <div>
@@ -74,7 +74,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.4-be/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.4-be/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 04</span>
       <div>
@@ -85,7 +85,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.5-DynamoDB/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.5-dynamodb/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 05</span>
       <div>
@@ -96,7 +96,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.6-APIGateway/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.6-apigateway/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 06</span>
       <div>
@@ -107,7 +107,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.7-SQS/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.7-sqs/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 07</span>
       <div>
@@ -118,7 +118,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.8-CloudWatch/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.8-cloudwatch/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 08</span>
       <div>
@@ -129,7 +129,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.9-SNS/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.9-sns/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #FF9900; background: #FFF7ED; padding: 5px 10px; border-radius: 6px; border: 1px solid #FFEDD5;">BƯỚC 09</span>
       <div>
@@ -140,7 +140,7 @@ Bài lab kết hợp các dịch vụ Serverless cốt lõi bao gồm **AWS Lamb
     <span style="font-size: 1.1rem; color: #cbd5e1; font-weight: 700;">&rarr;</span>
   </a>
 
-  <a class="toc-link" href="5.10-Cleanup/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
+  <a class="toc-link" href="./5.10-cleanup/" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-radius: 8px; color: inherit;">
     <div style="display: flex; align-items: center; gap: 14px;">
       <span style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #ef4444; background: #FEF2F2; padding: 5px 10px; border-radius: 6px; border: 1px solid #FEE2E2;">BƯỚC 10</span>
       <div>
