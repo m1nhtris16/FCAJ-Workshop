@@ -27,6 +27,8 @@ Người hâm mộ bóng đá quốc tế theo dõi các đội bóng Bundesliga
 Dữ liệu sự kiện trực tiếp ➔ Bundesliga Datahub / Amazon ECS Fargate ➔ AWS Lambda & Amazon Bedrock ➔ AWS AppSync (GraphQL API) ➔ Amazon DynamoDB & Frontend UI
 ```
 
+![Sơ đồ kiến trúc Bundesliga Generative AI](/images/blog4-architect.jpg)
+
 Trong kiến trúc này:
 
 * **Thu thập & Trích xuất Sự kiện (Amazon ECS Fargate)**: Dữ liệu sự kiện trực tiếp từ sân đấu (~1.600 sự kiện/trận) được nạp qua Bundesliga Datahub và xử lý trên ECS Fargate để trích xuất các thuộc tính trận đấu quan trọng (chỉ số cầu thủ, áp lực, đánh giá cơ hội).

@@ -27,6 +27,8 @@ International football fans following Bundesliga teams abroad need real-time, mi
 Live Pitch Event Data ➔ Bundesliga Datahub / Amazon ECS Fargate ➔ AWS Lambda & Amazon Bedrock ➔ AWS AppSync (GraphQL API) ➔ Amazon DynamoDB & Frontend UI
 ```
 
+![Bundesliga Generative AI Architecture](/images/blog4-architect.jpg)
+
 In this architecture:
 
 * **Event Ingestion & Extraction (Amazon ECS Fargate)**: Live event data from the pitch (~1,600 events per game) is ingested via Bundesliga's Datahub and processed on ECS Fargate to extract key match attributes (e.g., player metrics, pressure, chance evaluation).
