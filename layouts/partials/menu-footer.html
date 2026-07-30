@@ -1,18 +1,50 @@
-<left>
-    <br>
-    <br>
-    <b> Last Updated </b> <br>
-    <i>
-        <font color=orange>{{ now.Format "02-01-2006" }}</font>
-    </i>
-</left>
-<left>
-    <br>
-    <br>
-    <b> Team </b> <br>
-    <i>
-        <a href="https://www.facebook.com/groups/660548818043427" style="color:orange">First Cloud AI Journey</a>
-    </i>
-</left>
-<!-- Place this tag in your head or just before your close body tag. -->
+<div class="sidebar-footer-inner">
+  <span class="sidebar-footer-label">Last Updated</span>
+  <span class="sidebar-footer-value">{{ now.Format "02/01/2006" }}</span>
+
+  <span class="sidebar-footer-label" style="margin-top:0.9rem;">Team</span>
+  <a href="https://www.facebook.com/groups/660548818043427" target="_blank" rel="noopener" class="sidebar-footer-team-link">
+    <i class="fab fa-facebook-square"></i> First Cloud AI Journey
+  </a>
+</div>
+
+<style>
+.sidebar-footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.25rem 0;
+}
+.sidebar-footer-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6e7681;
+  display: block;
+}
+.sidebar-footer-value {
+  font-size: 12px;
+  color: #ff9900;
+  font-weight: 600;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+.sidebar-footer-team-link {
+  font-size: 12px;
+  color: #ff9900 !important;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.18s ease;
+}
+.sidebar-footer-team-link:hover {
+  color: #ffb84d !important;
+  text-decoration: none;
+  gap: 0.5rem;
+}
+</style>
+
+<!-- GitHub buttons script -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

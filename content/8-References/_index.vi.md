@@ -6,8 +6,6 @@ chapter: false
 pre: " <b> 8. </b> "
 ---
 
-# TÀI LIỆU THAM KHẢO & LIÊN KẾT NGOÀI
-
 Mục này tổng hợp toàn bộ các liên kết chính thức, kho mã nguồn, tài liệu kỹ thuật và tài nguyên bên ngoài liên quan đến dự án **CodExecute** và chương trình thực tập **AWS First Cloud AI Journey (FCAJ)**.
 
 ---
