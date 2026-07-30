@@ -1,50 +1,70 @@
 ---
-title: "Introduction & Project Deployment Overview"
-date: 2026-06-15
+title: "Introduction & Overview"
+date: 2026-07-30
 weight: 1
 chapter: false
 pre: " <b> 5.1. </b> "
 ---
 
+### Introduction to CodExecute
 
+**CodExecute** is a modern Online Judge platform and developer social network designed to compile, execute, and evaluate user-submitted code (C++, Java, Python, JavaScript) in real time.
 
-### 1. CodExecute Project Executive Overview
-**CodExecute** is an enterprise-grade Online Judge System and Automated Algorithm Evaluation Platform engineered natively on **Pure Serverless AWS** (Cloud-Native & Event-Driven). The system is built to handle tens of thousands of concurrent programming submission evaluation jobs submitted by competitive programmers and students during contest windows with high reliability, sub-2.0 second evaluation speeds ($< 2.0$s), and ultra-low monthly operational overhead.
-
-This **Workshop section serves as the comprehensive Step-by-Step AWS Deployment Guide**, documenting the complete end-to-end technical procedures for environment setup, VPC networking design, database schema provisioning, serverless application packaging, and official deployment of CodExecute onto the AWS Cloud from scratch.
-
----
-
-### 2. AWS System Deployment Architecture Overview
-The CodExecute platform is deployed across a multi-tier Serverless architecture adhering strictly to the 6 pillars of the **AWS Well-Architected Framework**:
-
-![CodExecute Architecture Diagram](/images/2-Proposal/architect-codexecute.drawio.png)
-
-#### Core AWS Infrastructure Components:
-* **Frontend & Edge Distribution Layer (Amazon CloudFront + S3):** Single Page Application UI (React + Vite + TailwindCSS + Monaco Code Editor) compiled and hosted on **Amazon S3** (`frontend-assets`), paired with **Amazon CloudFront CDN** for global edge asset delivery and automated AWS Shield Layer 3/4 DDoS protection.
-* **API Entry Gateway & Serverless Backend Layer (API Gateway + AWS Lambda API):** **Amazon API Gateway** (HTTP API) serves as the unified entry point with JWT Token authorization, proxying RESTful requests to an **AWS Lambda API Handler** (built using FastAPI + Mangum Serverless Adapter) for business logic, problem management, and social user interactions.
-* **Asynchronous Buffer Queue Layer (Amazon SQS Buffer Queue):** When users submit code, submission payloads are ingested immediately into an **Amazon SQS** queue (`Submissions Queue`). SQS acts as a high-concurrency buffer smoothing traffic spikes, backed by a **Dead-Letter Queue (DLQ)** capturing failed messages to guarantee zero data loss.
-* **Isolated Execution Sandbox Worker Layer (AWS Lambda Worker Sandbox):** **AWS Lambda Worker** handlers consume SQS messages, invoking language compiler toolchains to execute 4 supported languages (**C++, Java, Python, JavaScript**). The runtime environment is secured with disabled external network access (`VPC Network: Disabled / Strict Subnet Security Groups`) and hard resource caps (512MB RAM, 5s Timeout), mitigating Remote Code Execution (RCE) attacks.
-* **Database & Testcase Storage Layer (DynamoDB + S3):** **Amazon DynamoDB** (7 On-Demand NoSQL tables) stores user records, problem sets, and submission histories with single-digit millisecond query latency. Large testcase files are stored in a dedicated **Amazon S3** bucket (`testcases-storage`).
-* **Security & Private Networking Layer (Custom VPC + VPC Endpoints + IAM):** Service-to-service data traffic routes privately through a **Custom VPC** using **VPC Endpoints** (Gateway & Interface Endpoints), avoiding public Internet exposure. Service access permissions are enforced via **AWS IAM Roles** following the Principle of Least Privilege Access.
+Built on a **Pure Serverless Cloud-Native AWS** architecture, CodExecute addresses 3 primary operational challenges of traditional online judge systems:
+1. **RCE Prevention & Sandbox Security:** Fully isolating unverified user code within an **AWS Lambda Worker Sandbox** runtime with restricted permissions and disabled outbound network access.
+2. **Handling Submission Spikes:** Utilizing **Amazon SQS** as an asynchronous buffer queue to absorb traffic spikes without system degradation or downtime.
+3. **Cost Optimization (Pay-As-You-Go):** Auto-scaling infrastructure from 0 (Scale-to-Zero) during idle hours, reducing server costs by up to 75%.
 
 ---
 
-### 3. Step-by-Step AWS Project Deployment Roadmap
-The deployment guide for CodExecute on AWS is structured into 5 practical implementation phases matching the Workshop modules:
+## 2. Detailed System Architecture Layers & Execution Flow
 
-| Deployment Step | Workshop Module | Infrastructure Tasks Executed |
-| --- | --- | --- |
-| **Step 1** | **5.2 - Preparation & Network VPC** | Provision AWS Free Tier account, create IAM Users, install AWS CLI v2 / SAM CLI, and design Amazon Custom VPC topology (multi-AZ Public/Private Subnets, IGW, Route Tables). |
-| **Step 2** | **5.3 - Storage & Database Layer** | Create 3 dedicated S3 Buckets, configure S3 Lifecycle Rules, enable SSE-S3/KMS encryption, design 7 DynamoDB NoSQL tables, and attach VPC Gateway/Interface Endpoints for S3 & DynamoDB. |
-| **Step 3** | **5.4 - Serverless API & SQS Buffer** | Develop FastAPI Backend, wrap Mangum Serverless Adapter on AWS Lambda API Handler, configure API Gateway HTTP API routes, and deploy Amazon SQS `Submissions Queue` with Dead-Letter Queue (DLQ) failover. |
-| **Step 4** | **5.5 - Execution Worker Sandbox & Security** | Program AWS Lambda Worker Runners for 4 language toolchains, enforce container sandbox boundaries against RCE, attach Least-Privilege IAM Roles, and deploy CloudFront CDN for React Frontend. |
-| **Step 5** | **5.6 - Optimization, Testing & Cleanup** | Conduct load testing (1,000 VUs via Locust/k6), optimize compute RAM/Timeout with AWS Lambda Power Tuning, configure CloudWatch Slack Alarms, and script automated resource cleanup procedures. |
+The CodExecute system is designed as a fully layered architecture in the AWS `ap-southeast-1` Region, coordinating components through steps 1 to 9:
+
+### 2.1. CDN & Edge Security Layer
+* **Amazon CloudFront & AWS WAF:** Receives HTTP requests from user browsers, authenticates via OAuth Providers (Google, GitHub). CloudFront distributes static assets from S3 and routes API requests (`/api/*`) to API Gateway.
+
+### 2.2. Ingress & Static Hosting Layer
+* **AWS S3 Bucket (Static Hosting):** Stores compiled static web assets of the React application (HTML/JS/CSS).
+* **AWS API Gateway (REST API):** Accepts API requests from CloudFront and synchronously invokes (**Synchronous Invoke**) the Lambda API Handler.
+
+### 2.3. Serverless Compute & Sandbox Layer
+* **AWS ECR (Container Registry):** Stores Docker container images for Lambda functions.
+* **AWS Lambda (API Handler):**
+  * Manages user and problem data in DynamoDB (*Step 5a*).
+  * Reads sample testcases and user avatars from S3 (*Step 5b, 5c*).
+  * Pushes submission jobs (**Push Execution Job**) to SQS (*Step 6*).
+* **AWS Lambda (Code Executor Sandbox):**
+  * Triggered by event notifications (**Event Trigger**) from SQS (*Step 7*).
+  * Fetches full testcase suites from S3 (*Step 8*).
+  * Compiles and evaluates code inside an isolated sandbox environment.
+  * Writes submission evaluation results (**Save Result**) to DynamoDB (*Step 9*).
+
+### 2.4. Queue Processing Layer
+* **AWS SQS (Submission Queue):** Asynchronous buffer queue holding submission jobs, regulating throughput and triggering the Lambda Code Executor.
+
+### 2.5. Database & Storage Layer
+* **AWS DynamoDB (Submission & Problem):** High-performance NoSQL database storing user profiles, problemsets, and evaluation results.
+* **AWS S3 Bucket (Testcases & User Avatar):** Two independent S3 Buckets storing problem testcase files and user profile avatars.
+
+### 2.6. Security & Monitoring Layer
+* **IAM Roles (Execution Role):** Enforces Least Privilege Access across execution services.
+* **AWS CloudWatch (Logs & Metrics) & AWS SNS:** Collects execution logs, monitors performance metrics, and publishes incident notification alerts.
 
 ---
 
-### 4. Key Expected Deployment Outcomes
-* **100% Serverless Cloud-Native Infrastructure:** Auto-scales effortlessly from 0 to thousands of concurrent submissions without managing EC2 servers.
-* **Ultra-Low Response Latencies:** API Latency $< 200ms$, submission evaluation duration $< 2.0$ seconds.
-* **Hardened Zero-Trust Security:** Zero static access keys stored, 100% user code execution isolated in Lambda Sandboxes, eliminating RCE risks.
-* **Outstanding Cost Efficiency:** Estimated ongoing operational budget of **~$15.43 USD/month** (maintained under **< $3.00 USD/month** during Year 1 under AWS Free Tier).
+<div align="center">
+
+<img src="/images/architect-codexecute.png" alt="CodExecute Architecture Diagram" style="width: 90%; max-width: 1200px; border-radius: 6px;">
+
+<p style="font-size: 1.15rem; font-weight: 600; margin-top: 8px;">
+<i>Figure 1: Detailed CodExecute System Architecture on AWS Serverless</i>
+</p>
+
+<img src="/images/5-Workshop/5.1-Workshop-overview/project_overview.png" alt="CodExecute Web Application Interface" style="width: 80%; max-width: 1100px; border-radius: 6px;">
+<p style="font-size: 1.15rem; font-weight: 600; margin-top: 8px;">
+<i>Figure 2: CodExecute Web Application Interface</i></br>
+<i>Live Web: </i><a href="https://d1hsp5bm4hkjmb.cloudfront.net">https://d1hsp5bm4hkjmb.cloudfront.net</a>
+</p>
+
+</div>

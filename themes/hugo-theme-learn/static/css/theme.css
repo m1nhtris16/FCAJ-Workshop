@@ -1410,40 +1410,56 @@ td a {
 }
 
 .copy-to-clipboard {
-  background-image: url(../images/clippy.svg);
-  background-position: 50% 50%;
-  background-size: 16px 16px;
-  background-repeat: no-repeat;
-  width: 27px;
-  height: 1.45rem;
-  top: -1px;
-  display: inline-block;
+  display: none !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNlMmU4ZjAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSI5IiB5PSI5IiB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxwYXRoIGQ9Ik01IDE1SDRhMiAyIDAgMCAxLTItMlY0YTIgMiAwIDAgMSAyLTJoOWEyIDIgMCAw IDEgMiAydjEiPjwvcGF0aD48L3N2Zz4=') !important;
+  background-position: center center !important;
+  background-size: 16px 16px !important;
+  background-repeat: no-repeat !important;
+  width: 32px !important;
+  height: 32px !important;
+  top: 0;
   vertical-align: middle;
   position: relative;
   color: #5e5e5e;
-  background-color: #fff7dd;
-  margin-left: -0.2rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  border-radius: 0 2px 2px 0;
-  margin-bottom: 1px;
+  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .copy-to-clipboard:hover {
-  background-color: #e8e2cd;
+  background-color: rgba(255, 153, 0, 0.3) !important;
+  border-color: #FF9900 !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZjk5MDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSI5IiB5PSI5IiB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxwYXRoIGQ9Ik01 IDE1SDRhMiAyIDAgMCAxLTItMlY0YTIgMiAwIDAgMSAyLTJoOWEyIDIgMCAw IDEgMiAydjEiPjwvcGF0aD48L3N2Zz4=') !important;
+  background-repeat: no-repeat !important;
 }
 
 pre .copy-to-clipboard {
-  position: absolute;
-  right: 4px;
-  top: 4px;
-  background-color: #949bab;
-  color: #ccc;
-  border-radius: 2px;
+  position: absolute !important;
+  right: 8px !important;
+  top: 8px !important;
+  width: 32px !important;
+  height: 32px !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 6px !important;
+  background-repeat: no-repeat !important;
 }
 
 pre .copy-to-clipboard:hover {
-  background-color: #656c72;
-  color: #fff;
+  background-color: rgba(255, 153, 0, 0.3) !important;
+  border-color: #FF9900 !important;
+  transform: translateY(-1px) scale(1.05) !important;
+}
+
+pre .copy-to-clipboard.tooltipped {
+  background-color: rgba(16, 185, 129, 0.3) !important;
+  border-color: #10B981 !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMxMEI5ODEiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjIwIDYgOSAxNyA4IDEyIj48L3BvbHlsaW5lPjwvc3ZnPg==') !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: 16px 16px !important;
 }
 
 .parent-element {

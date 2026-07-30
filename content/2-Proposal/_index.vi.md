@@ -18,7 +18,16 @@ pre: " <b> 2. </b> "
 
 Dự án được xây dựng 100% theo mô hình **Pure Serverless Cloud-Native AWS**, sử dụng **AWS Lambda** làm môi trường thực thi backend lẫn sandbox chấm bài cách ly hoàn toàn, nhằm đảm bảo tính sẵn sàng cao (High Availability), khả năng tự động mở rộng từ 0 (Scale-to-Zero), và môi trường thực thi mã nguồn bảo mật (Secure Sandbox Execution).
 
-![CodExecute Platform Architecture](/images/2-Proposal/codexecute_platform_structure.png)
+<div align="center" style="margin: 24px 0;">
+
+<img src="/images/2-Proposal/codexecute_platform_structure.jpg" alt="Giao diện nền tảng CodExecute Online Judge" style="width: 95%; max-width: 1100px; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.15);">
+
+<p style="font-size: 1.05rem; font-weight: 600; margin-top: 10px; color: #475569;">
+<i>Giao diện tổng quan nền tảng chấm bài tự động &amp; mạng xã hội CodExecute</i>
+</p>
+
+</div>
+
 
 ---
 
@@ -80,20 +89,75 @@ Kiến trúc của **CodExecute** tuân thủ 5 trụ cột của **AWS Well-Arc
 5. **Cost Optimization (Tối ưu chi phí):** Áp dụng triệt để kiến trúc Pure Serverless Event-Driven (Lambda Pay-As-You-Go).
 
 ### Sơ đồ kiến trúc của dự án
-![Sơ đồ kiến trúc CodExecute](/images/2-Proposal/architect-codexecute.drawio.png)
+![Sơ đồ kiến trúc CodExecute](/images/architect-codexecute.png)
 
-Dưới đây là bảng liệt kê toàn bộ **8 dịch vụ AWS cốt lõi** được ứng dụng trong dự án CodExecute, làm rõ vai trò, nhiệm vụ và lý do kỹ thuật lựa chọn:
+### Phân Tích Phân Lớp Kiến Trúc (Architecture Layers)
+Dựa trên sơ đồ kiến trúc tổng quan chuẩn AWS, hệ thống CodExecute được thiết kế phân thành 6 lớp chức năng hoạt động tại AWS Region `ap-southeast-1`:
+
+1. **Lớp CDN & Bảo mật bề mặt (CDN Layer):**
+   - **Amazon CloudFront:** Phân phối nội dung tĩnh từ S3 tới người dùng toàn cầu với độ trễ thấp và đóng vai trò Reverse Proxy định tuyến `/api/*` tới API Gateway.
+   - **AWS WAF:** Tường lửa ứng dụng web giúp ngăn chặn các đợt tấn công layer 7, SQL Injection, Cross-Site Scripting (XSS) và giới hạn tần suất request (Rate Limiting).
+   - **Xác thực OAuth Providers:** Hỗ trợ đăng nhập ứng dụng thông qua Google và GitHub.
+
+2. **Lớp Cổng tiếp nhận & Host tĩnh (Ingress & Static Hosting Layer):**
+   - **AWS S3 Bucket (Static Hosting):** Lưu trữ gói sản phẩm tĩnh (React Frontend HTML/JS/CSS).
+   - **AWS API Gateway (REST API):** Cổng giao tiếp RESTful API tiếp nhận các yêu cầu HTTP từ CloudFront và chuyển tiếp đồng bộ (**Synchronous Invoke**) tới Lambda API Handler.
+
+3. **Lớp Tính toán Serverless & Môi trường Sandbox (Serverless Compute & Sandbox Layer):**
+   - **AWS ECR (Container Registry):** Quản lý và lưu trữ Container Images để triển khai lên các hàm Lambda.
+   - **AWS Lambda (API Handler):** Chạy backend FastAPI, tương tác dữ liệu với DynamoDB, đọc S3 assets và đẩy job bài nộp vào hàng chờ SQS.
+   - **AWS Lambda (Code Executor Sandbox):** Nhận kích hoạt từ SQS, tải bộ testcase từ S3, thực thi code người dùng trong môi trường Sandbox cách ly tuyệt đối và lưu kết quả vào DynamoDB.
+
+4. **Lớp Xử lý hàng chờ (Queue Processing Layer):**
+   - **AWS SQS (Submission Queue):** Hàng chờ đệm bất đồng bộ tiếp nhận job bài nộp, đóng vai trò điều tiết thông lượng (Buffer) và kích hoạt Lambda Sandbox.
+
+5. **Lớp Cơ sở dữ liệu & Lưu trữ (Database & Storage Layer):**
+   - **AWS DynamoDB (Submission & Problem):** Cơ sở dữ liệu NoSQL tốc độ cao lưu trữ bảng bài tập, bài nộp, thông tin người dùng và mạng xã hội.
+   - **AWS S3 Bucket (Testcases):** Lưu trữ bộ dữ liệu Testcases (Input/Output text files) bài tập.
+   - **AWS S3 Bucket (User Avatar):** Lưu trữ hình ảnh đại diện của người dùng.
+
+6. **Lớp Bảo mật & Giám sát (Security & Monitoring Layer):**
+   - **IAM Roles (Execution Role):** Phân quyền truy cập tối thiểu (Least Privilege) giữa các dịch vụ.
+   - **AWS CloudWatch (Logs & Metrics):** Giám sát log thực thi và chỉ số hiệu năng hệ thống.
+   - **AWS SNS:** Gửi thông báo cảnh báo sự cố tự động cho đội ngũ vận hành.
+
+---
+
+### Luồng Xử Lý Bài Nộp Đầy Đủ (End-to-End Execution Workflow)
+Luồng vận hành từ lúc người dùng tương tác đến khi nhận kết quả chấm bài diễn ra qua **9 bước**:
+
+1. **Step 1:** Người dùng gửi **HTTP Request** từ trình duyệt (User Browser) sau khi đăng nhập qua **OAuth Providers** (Google/GitHub).
+2. **Step 2:** **Amazon CloudFront** đọc dữ liệu tĩnh (**Fetch Static Files**) từ **AWS S3 Bucket (Static Hosting)** để phân phối trang web cho người dùng.
+3. **Step 3:** Với các yêu cầu API (`/api/*`), CloudFront chuyển tiếp đường dẫn (**Forward API Routing**) tới **AWS API Gateway (REST API)**.
+4. **Step 4:** API Gateway gọi đồng bộ (**Synchronous Invoke**) đến hàm **AWS Lambda (API Handler)**.
+5. **Step 5a, 5b, 5c:** Lambda API Handler thực hiện các thao tác:
+   - **Step 5a:** Đọc/Ghi dữ liệu người dùng & bài tập (**CRUD User/Problem Data**) trên **Amazon DynamoDB**.
+   - **Step 5b:** Đọc các mẫu testcase (**Fetch Sample Testcases**) từ **AWS S3 Bucket (Testcases)**.
+   - **Step 5c:** Đọc ảnh đại diện (**Fetch User Avatar**) từ **AWS S3 Bucket (User Avatar)**.
+6. **Step 6:** Lambda API Handler đóng gói payload bài nộp và đẩy vào hàng chờ (**Push Execution Job**) trên **AWS SQS (Submission Queue)**, trả về trạng thái `Pending` ngay lập tức cho người dùng.
+7. **Step 7:** **AWS SQS** tự động phát sự kiện kích hoạt (**Event Trigger**) hàm **AWS Lambda (Code Executor Sandbox)**.
+8. **Step 8:** Lambda Code Executor Sandbox tải toàn bộ tệp testcase (**Fetch Full Testcases**) từ **AWS S3 Bucket (Testcases)**.
+9. **Step 9:** Lambda Code Executor Sandbox thực thi code trong môi trường Sandbox cách ly và ghi nhận kết quả chấm bài (**Save Result**) vào **Amazon DynamoDB**.
+
+---
+
+### Bảng Liệt Kê Các Dịch Vụ AWS Cốt LõiTrong Dự Án
+
+Dưới đây là bảng tổng hợp các dịch vụ AWS được ứng dụng trong sơ đồ kiến trúc CodExecute:
 
 | STT | Dịch vụ AWS | Vai trò & Nhiệm vụ trong CodExecute | Lý do lựa chọn & Lợi ích kỹ thuật |
 | :---: | :--- | :--- | :--- |
-| **1** | **Amazon CloudFront** | Phân phối ứng dụng React Frontend từ S3 Bucket đến người dùng cuối với độ trễ thấp nhất. Đóng vai trò Reverse Proxy điều hướng `/api/*` tới API Gateway. | Tăng tốc tải trang toàn cầu bằng caching ở các Edge Locations. Hỗ trợ HTTPS/TLS 1.3 tự động, tích hợp sẵn AWS Shield bảo vệ chống DDoS lớp 3/4. |
-| **2** | **Amazon S3** | **Bucket 1:** Lưu trữ static assets (HTML/JS/CSS) của Frontend.<br>**Bucket 2:** Lưu trữ bộ Testcase (Input/Output text files) bài tập.<br>**Bucket 3:** Lưu trữ file avatar người dùng. | Chi phí lưu trữ cực rẻ ($0.023/GB), độ tin cậy 99.999999999% (11 số 9 durability). Khả năng mở rộng dung lượng vô hạn, tích hợp S3 Presigned URL để upload file an toàn. |
-| **3** | **Amazon DynamoDB** | Lưu trữ toàn bộ dữ liệu cấu trúc của hệ thống bao gồm: Bảng `Users`, `Problems`, `Submissions`, `TestCases`, `Posts`, `Notifications`, `UserFollows`. | Tốc độ truy vấn ổn định ở mức single-digit millisecond. Khả năng tự động mở rộng (On-Demand capacity) xử lý hàng triệu request mà không cần quản lý cluster hay sharding phức tạp. |
-| **4** | **AWS Lambda** | **Lambda API:** Chạy ứng dụng FastAPI backend xử lý logic RESTful API.<br>**Lambda Worker:** Tiêu thụ tin nhắn từ SQS, biên dịch và thực thi code của người dùng (C++, Java, Python, JS) trong môi trường Sandbox cách ly. | Mô hình tính phí theo millisecond (chỉ trả tiền khi code chạy). Tự động scale từ 0 lên hàng nghìn request tức thì mà không cần quản lý server hay container cluster. |
-| **5** | **Amazon SQS** | Làm hàng chờ bất đồng bộ lưu trữ các yêu cầu nộp bài (`Submissions Queue`) từ Lambda API trước khi chuyển cho Worker chấm bài. | Đóng vai trò Buffer chống nghẽn hệ thống khi có đợt nộp bài đột biến (Traffic Spikes). Đảm bảo không mất mát dữ liệu nhờ cơ chế Message Retention và Dead-Letter Queue (DLQ). |
-| **6** | **AWS IAM** | Quản lý định danh, cấp quyền tối thiểu (Least Privilege Access) cho các dịch vụ Lambda, S3, DynamoDB, SQS giao tiếp với nhau. | Đảm bảo nguyên tắc bảo mật Zero-Trust. Ngăn chặn quyền truy cập trái phép giữa các thành phần hệ thống thông qua IAM Roles & Resource-based Policies. |
-| **7** | **Amazon CloudWatch** | Thu thập toàn bộ Logs (CloudWatch Logs) từ Lambda API & Worker, API Gateway. Theo dõi chỉ số hiệu năng (Metrics) và thiết lập Cảnh báo (Alarms). | Giám sát sức khỏe hệ thống thời gian thực. Cảnh báo qua Alarm khi tỷ lệ lỗi > 1% hoặc CPU/RAM quá tải. Hỗ trợ truy vết lỗi (Debugging) nhanh chóng. |
-| **8** | **Amazon API Gateway** | Làm cổng vào duy nhất (API Gateway) quản lý các RESTful API endpoints, điều hướng request đến Lambda API Handler. | Hỗ trợ Rate Limiting / Throttling phòng chống Spam API, xác thực JWT Token, tích hợp trực tiếp với CORS và CloudFront Custom Domain. |
+| **1** | **Amazon CloudFront** | Phân phối ứng dụng React Frontend từ S3 Bucket đến người dùng toàn cầu. Đóng vai trò Reverse Proxy điều hướng `/api/*` tới API Gateway. | Tăng tốc tải trang toàn cầu bằng caching ở các Edge Locations. Hỗ trợ HTTPS/TLS 1.3 tự động, tích hợp bảo vệ chống DDoS. |
+| **2** | **AWS WAF** | Tường lửa ứng dụng bảo vệ CloudFront và API Gateway. | Ngăn chặn các đợt tấn công Web (SQLi, XSS, Bot Attack) và áp dụng Rate Limiting chống spam request. |
+| **3** | **Amazon S3** | **Bucket 1:** Lưu trữ static assets (HTML/JS/CSS) Frontend.<br>**Bucket 2:** Lưu trữ bộ Testcase bài tập.<br>**Bucket 3:** Lưu trữ file avatar người dùng. | Chi phí lưu trữ rẻ ($0.023/GB), độ tin cậy 99.999999999% (11 số 9 durability). Dung lượng mở rộng vô hạn, hỗ trợ S3 Presigned URL. |
+| **4** | **Amazon API Gateway** | Cổng giao tiếp RESTful API tiếp nhận request từ CloudFront và gọi đồng bộ tới Lambda API Handler. | Hỗ trợ Rate Limiting / Throttling phòng chống Spam API, xác thực JWT Token, tích hợp trực tiếp với CORS và CloudFront Domain. |
+| **5** | **AWS ECR** | Lưu trữ Container Images cho Lambda API Handler và Lambda Code Executor Sandbox. | Quản lý container image bảo mật, tích hợp native với AWS Lambda để kéo image nhanh chóng khi scale. |
+| **6** | **AWS Lambda** | **Lambda API Handler:** Xử lý logic ứng dụng RESTful API.<br>**Lambda Code Executor Sandbox:** Thực thi và chấm điểm mã nguồn (C++, Java, Python, JS) trong Sandbox cách ly. | Mô hình Serverless Pay-As-You-Go (chỉ trả tiền khi code chạy). Tự động scale tức thì mà không cần quản lý cụm máy chủ. |
+| **7** | **Amazon SQS** | Làm hàng chờ bất đồng bộ lưu trữ các bài nộp (`Submission Queue`) điều tiết lưu lượng cho Worker chấm bài. | Đóng vai trò Buffer chống nghẽn hệ thống khi có đợt nộp bài cao điểm. Đảm bảo không mất bài nộp nhờ mechanism Message Retention & DLQ. |
+| **8** | **Amazon DynamoDB** | Lưu trữ toàn bộ dữ liệu cấu trúc hệ thống: Bảng `Users`, `Problems`, `Submissions`, `TestCases`, `Posts`, `Notifications`, `UserFollows`. | Tốc độ truy vấn ổn định ở mức single-digit millisecond. Chế độ On-Demand tự động scale xử lý hàng triệu request không cần sharding. |
+| **9** | **AWS IAM** | Quản lý định danh và phân quyền tối thiểu (Least Privilege Access Execution Role) giữa các dịch vụ AWS. | Đảm bảo nguyên tắc bảo mật Zero-Trust. Ngăn chặn quyền truy cập trái phép giữa các thành phần hệ thống thông qua IAM Roles & Policies. |
+| **10** | **Amazon CloudWatch** | Thu thập toàn bộ Logs thực thi từ Lambda, API Gateway. Theo dõi chỉ số hiệu năng (Metrics) và thiết lập Cảnh báo (Alarms). | Giám sát sức khỏe hệ thống thời gian thực. Cảnh báo tự động khi tỷ lệ lỗi vượt ngưỡng, hỗ trợ truy vết lỗi (Debugging) nhanh chóng. |
+| **11** | **Amazon SNS** | Dịch vụ gửi thông báo cảnh báo sự cố từ CloudWatch Alarms tới email quản trị viên. | Đảm bảo phản ứng nhanh trước các sự cố vận hành thông qua các kênh notification tức thời. |
 
 ---
 
@@ -110,8 +174,8 @@ Dự án được triển khai trong vòng **7 tuần** (từ ngày **15/06/2026
 * **Phase 3: Xử Lý Bất Đồng Bộ & Lambda Sandbox** *(06/07/2026 – 16/07/2026)*
   > Xây dựng hàng chờ Amazon SQS và triển khai Lambda Worker thực thi mã nguồn tự động trong môi trường Sandbox cách ly.
 
-* **Phase 4: Kiểm Thử Chịu Tải & Bảo Mật Hardening** *(17/07/2026 – 25/07/2026)*
-  > Kiểm thử chịu tải (1,000 VUs với Locust/k6), đánh giá an ninh bảo mật chống RCE và thử nghiệm cơ chế DLQ failover.
+* **Phase 4: Kiểm Thử & Bảo Mật Hardening** *(17/07/2026 – 25/07/2026)*
+  > Kiểm thử chịu tải (Load Testing với Locust/k6 lên đến 1,000 VUs), đánh giá an ninh bảo mật chống RCE và thử nghiệm cơ chế DLQ failover.
 
 * **Phase 5: Tối Ưu Chi Phí & Chính Thức Go-Live** *(26/07/2026 – 31/07/2026)*
   > Tối ưu cấu hình RAM/Timeout Lambda, thiết lập cảnh báo CloudWatch Budgets và chính thức **GO-LIVE ngày 31/07/2026**.
@@ -132,21 +196,25 @@ Dự án được triển khai trong vòng **7 tuần** (từ ngày **15/06/2026
 
 ### 1. Ước Tính Ngân Sách Hàng Tháng 
 
-Dự toán ngân sách được tính dựa trên quy mô vận hành trung bình: **100,000 bài nộp/tháng** và **500,000 API requests/tháng**.
+Dự toán ngân sách được tính dựa trên quy mô vận hành trung bình: **100,000 bài nộp/tháng** và **500,000 API requests/tháng** cho toàn bộ **11 dịch vụ AWS cốt lõi**:
 
-| Dịch Vụ AWS | Mức Độ Sử Dụng Dự Kiến / Tháng | Đơn Giá Tham Chiếu (ap-southeast-1) | Chi Phí Hàng Tháng (USD) |
-| :--- | :--- | :--- | :---: |
-| **AWS Lambda** | 500,000 API Requests + 100,000 Worker Sandbox executions (Memory: 512MB, Avg duration: 800ms) | $0.20 / 1M Requests + Compute time | **$3.80** |
-| **Amazon API Gateway** | 500,000 HTTP API calls | $1.00 / 1M Requests | **$0.50** |
-| **Amazon SQS** | 200,000 SQS Requests (SendMessage + ReceiveMessage) | $0.40 / 1M Requests | **$0.08** |
-| **Amazon DynamoDB** | 1,000,000 Read/Write Units (On-Demand Mode) + 5GB Data Storage | $0.25 / 1M WCU, $0.05 / 1M RCU | **$3.20** |
-| **Amazon S3** | 15GB Storage (Testcases + User Media + Web Assets) + 100k GET/PUT | $0.023 / GB | **$0.65** |
-| **Amazon CloudFront** | 50GB Data Transfer Out + 500k HTTPS Requests | $0.09 / GB | **$4.50** |
-| **Amazon CloudWatch** | 3GB Ingestion Logs + 5 Custom Metrics + 3 Alarms | $0.57 / GB Logs | **$2.70** |
-| **AWS IAM** | Toàn bộ IAM Users, Roles, Policies | Miễn phí | **$0.00** |
-| **TỔNG CỘNG CHI PHÍ DỰ KIẾN / THÁNG:** | | | **~$15.43 USD / tháng** |
+| STT | Dịch Vụ AWS | Mức Độ Sử Dụng Dự Kiến / Tháng | Đơn Giá Tham Chiếu (ap-southeast-1) | Chi Phí Hàng Tháng (USD) |
+| :---: | :--- | :--- | :--- | :---: |
+| **1** | **AWS Lambda** | 500,000 API Requests + 100,000 Worker Sandbox executions (Memory: 512MB, Avg duration: 800ms) | $0.20 / 1M Requests + $0.0000000083/GB-s | **$3.80** |
+| **2** | **Amazon API Gateway** | 500,000 HTTP API calls | $1.00 / 1M Requests | **$0.50** |
+| **3** | **Amazon SQS** | 200,000 SQS Requests (SendMessage + ReceiveMessage) + Dead-Letter Queue (DLQ) | $0.40 / 1M Requests | **$0.08** |
+| **4** | **Amazon DynamoDB** | 1,000,000 Read/Write Units (On-Demand Mode) + 5GB Data Storage | $0.25 / 1M WCU, $0.05 / 1M RCU | **$3.20** |
+| **5** | **Amazon S3** | 15GB Storage (3 Buckets: Static Web, Testcases, User Avatars) + 100k GET/PUT Requests | $0.023 / GB | **$0.65** |
+| **6** | **Amazon CloudFront** | 50GB Data Transfer Out + 500k HTTPS Requests | $0.09 / GB | **$4.50** |
+| **7** | **AWS WAF** | 1 Web ACL + 2 Managed Rule Groups + 500k Inspected Requests | $5.00 / Web ACL + $1.00 / Rule Group + $0.60 / 1M Requests | **$7.30** |
+| **8** | **AWS ECR** | 2 Container Repositories (Lambda API Handler & Code Executor Images, ~2GB Storage) | $0.10 / GB / tháng | **$0.20** |
+| **9** | **Amazon CloudWatch** | 3GB Ingestion Logs + 5 Custom Metrics + 3 Alarms | $0.57 / GB Logs | **$2.70** |
+| **10** | **Amazon SNS** | 100 Email & Push Notifications gửi cảnh báo sự cố từ CloudWatch Alarms | $0.50 / 100k Notifications | **$0.01** |
+| **11** | **AWS IAM** | Toàn bộ IAM Execution Roles, Resource Policies, Access Keys | Miễn phí dịch vụ | **$0.00** |
+| | **TỔNG CỘNG CHI PHÍ DỰ KIẾN / THÁNG:** | | | **~$22.94 USD / tháng** |
 
-> 💡 *Lưu ý:* Trong 12 tháng đầu tiên triển khai, phần lớn chi phí trên sẽ nằm trong gói **AWS Free Tier** (1M Lambda requests/tháng, 1M API Gateway requests/tháng, 25GB DynamoDB storage, 5GB S3 storage), giúp chi phí thực tế duy trì ở mức **< $3.00 USD/tháng**.
+> 💡 *Lưu ý về Gói AWS Free Tier:* Trong 12 tháng đầu tiên triển khai, nhờ tận dụng gói **AWS Free Tier** (CloudFront 1TB Data Out miễn phí, 1M Lambda Requests/tháng, 1M API Gateway Requests/tháng, 25GB DynamoDB storage, 5GB S3 storage, 5GB CloudWatch Logs), chi phí vận hành thực tế được tối ưu hóa chỉ còn **~$7.50 USD/tháng** (chủ yếu là phí cố định của AWS WAF Web ACL).
+
 
 ---
 
@@ -197,5 +265,3 @@ Sau khi hoàn thành triển khai vào ngày **31/07/2026**, hệ thống **CodE
 * **Tối ưu chi phí:** Tiết kiệm hơn **75%** chi phí vận hành hạ tầng so với việc thuê máy chủ truyền thống (EC2/Dedicated Server).
 * **Khả năng bảo trì cao:** Hạ tầng quản lý 100% bằng kịch bản Code (IaC SAM/CloudFormation), giúp việc tạo mới hoặc khôi phục môi trường thử nghiệm chỉ mất dưới 15 phút.
 * **Trải nghiệm người dùng vượt trội:** Cung cấp cho cộng đồng lập trình viên Việt Nam một nền tảng thực thi thuật toán chuẩn hóa, tin cậy, góp phần nâng cao kỹ năng lập trình và chuẩn bị cho các kỳ thi tuyển dụng công nghệ.
-
----

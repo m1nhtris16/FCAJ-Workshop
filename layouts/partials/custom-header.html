@@ -1,0 +1,241 @@
+<style>
+/* ───────────────────────────────────────────────
+   Custom Copy-to-Clipboard Button Style Override
+   ─────────────────────────────────────────────── */
+
+/* 1. Default: Hide all orphan copy buttons by default */
+.copy-to-clipboard {
+  display: none !important;
+}
+
+/* 2. Code block (pre > code) copy button */
+pre {
+  position: relative !important;
+}
+
+pre .copy-to-clipboard {
+  display: inline-block !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 6px !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNlMmU4ZjAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSI5IiB5PSI5IiB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxwYXRoIGQ9Ik01 IDE1SDRhMiAyIDAgMCAxLTItMlY0YTIgMiAwIDAgMSAyLTJoOWEyIDIgMCAw IDEgMiAydjEiPjwvcGF0aD48L3N2Zz4=') !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: 16px 16px !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+  z-index: 10 !important;
+  margin: 0 !important;
+}
+
+pre .copy-to-clipboard:hover {
+  background-color: rgba(255, 153, 0, 0.3) !important;
+  border-color: #FF9900 !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZjk5MDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSI5IiB5PSI5IiB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxwYXRoIGQ9Ik01 IDE1SDRhMiAyIDAgMCAxLTItMlY0YTIgMiAwIDAgMSAyLTJoOWEyIDIgMCAw IDEgMiAydjEiPjwvcGF0aD48L3N2Zz4=') !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: 16px 16px !important;
+  transform: translateY(-1px) scale(1.05) !important;
+  box-shadow: 0 4px 10px rgba(255, 153, 0, 0.4) !important;
+}
+
+pre .copy-to-clipboard.tooltipped {
+  background-color: rgba(16, 185, 129, 0.3) !important;
+  border-color: #10B981 !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMxMEI5ODEiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjIwIDYgOSAxNyA4 IDEyIj48L3BvbHlsaW5lPjwvc3ZnPg==') !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: 16px 16px !important;
+  transform: scale(1.05) !important;
+}
+
+/* 3. Inline code (text/red code) copy button */
+:not(pre) > code + .copy-to-clipboard {
+  display: inline-block !important;
+  position: relative !important;
+  top: -1px !important;
+  left: auto !important;
+  right: auto !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+  vertical-align: middle !important;
+  border-radius: 4px !important;
+  background-color: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM0NzU1NjkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSI5IiB5PSI5IiB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxwYXRoIGQ9Ik01 IDE1SDRhMiAyIDAgMCAxLTItMlY0YTIgMiAwIDAgMSAyLTJoOWEyIDIgMCAw IDEgMiAydjEiPjwvcGF0aD48L3N2Zz4=') !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: 11px 11px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+}
+
+:not(pre) > code + .copy-to-clipboard:hover {
+  background-color: #fff7ed !important;
+  border-color: #ff9900 !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZjk5MDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSI5IiB5PSI5IiB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxwYXRoIGQ9Ik01 IDE1SDRhMiAyIDAgMCAxLTItMlY0YTIgMiAwIDAgMSAyLTJoOWEyIDIgMCAw IDEgMiAydjEiPjwvcGF0aD48L3N2Zz4=') !important;
+  transform: scale(1.1) !important;
+}
+
+:not(pre) > code + .copy-to-clipboard.tooltipped {
+  background-color: #ecfdf5 !important;
+  border-color: #10b981 !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMxMEI5ODEiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjIwIDYgOSAxNyA4 IDEyIj48L3BvbHlsaW5lPjwvc3ZnPg==') !important;
+}
+
+/* ───────────────────────────────────────────────
+   Modern Table of Contents Dropdown (.progress / #TableOfContents)
+   ─────────────────────────────────────────────── */
+.progress {
+  position: absolute !important;
+  top: 45px !important;
+  left: 20px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), 0 4px 10px rgba(0, 0, 0, 0.08) !important;
+  min-width: 320px !important;
+  max-width: 440px !important;
+  max-height: 75vh !important;
+  overflow-y: auto !important;
+  z-index: 9999 !important;
+  padding: 16px !important;
+  animation: fadeInTOC 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes fadeInTOC {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#TableOfContents {
+  font-size: 0.88rem !important;
+  max-height: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+#TableOfContents ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+}
+
+#TableOfContents ul ul {
+  padding-left: 14px !important;
+  border-left: 2px solid #f1f5f9 !important;
+  margin-left: 6px !important;
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+}
+
+#TableOfContents li {
+  margin-bottom: 4px !important;
+}
+
+#TableOfContents a {
+  color: #334155 !important;
+  text-decoration: none !important;
+  display: block !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  transition: all 0.18s ease !important;
+  border-bottom: none !important;
+  background-image: none !important;
+}
+
+#TableOfContents a:after,
+#TableOfContents a:before {
+  display: none !important;
+}
+
+#TableOfContents a:hover {
+  color: #ff9900 !important;
+  background-color: #fff7ed !important;
+}
+
+#toc-menu {
+  cursor: pointer !important;
+  transition: color 0.2s ease !important;
+}
+
+#toc-menu:hover {
+  color: #ff9900 !important;
+}
+
+/* ───────────────────────────────────────────────
+   Balanced & Uniform Spacing for Headings & HR Lines
+   ─────────────────────────────────────────────── */
+#body-inner hr,
+#body hr,
+hr {
+  border: none !important;
+  border-top: 1px solid #e2e8f0 !important;
+  margin-top: 3rem !important;
+  margin-bottom: 2.25rem !important;
+  clear: both !important;
+}
+
+#body-inner h1,
+#body h1 {
+  margin-top: 2rem !important;
+  margin-bottom: 1.5rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 8px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  border-bottom: 3px solid #ff9900 !important;
+}
+
+#body-inner h2,
+#body h2 {
+  font-size: 1.45rem !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1.25rem !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 6px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  color: #1e293b !important;
+  border-bottom: 2px solid #ff9900 !important;
+  width: 100% !important;
+  display: block !important;
+  clear: both !important;
+}
+
+#body-inner h3,
+#body h3 {
+  font-size: 1.2rem !important;
+  margin-top: 1.8rem !important;
+  margin-bottom: 1rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 4px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  color: #334155 !important;
+  border-bottom: none !important;
+}
+
+#body-inner h4,
+#body h4 {
+  font-size: 1.05rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+  padding-top: 0.4rem !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+  border-bottom: none !important;
+}
+</style>

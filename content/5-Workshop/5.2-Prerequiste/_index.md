@@ -1,242 +1,267 @@
 ---
-title : "Prerequiste"
-date : 2024-01-01 
-weight : 2 
-chapter : false
-pre : " <b> 5.2. </b> "
+title: "Prerequisites"
+date: 2026-07-30
+weight: 2
+chapter: false
+pre: " <b> 5.2. </b> "
 ---
 
-#### IAM permissions
-Add the following IAM permission policy to your user account to deploy and cleanup this workshop.
-```
+To prepare for this workshop, you need to configure your local development environment, set up AWS CLI credentials, and provision infrastructure resources via CloudFormation.
+
+---
+
+### 1. Local Development Environment
+
+Ensure your personal workstation is equipped with the following tools and command-line interfaces:
+
+1. **AWS CLI (Command Line Interface):**
+   - Command-line tool to interact with AWS services.
+   - **Account Authentication:** Authenticate in your local environment using an AWS account with **AdministratorAccess** permissions via an **Access Key ID** and **Secret Access Key**.
+   - Verify and configure using:
+     ```bash
+     aws configure
+     # AWS Access Key ID: <YOUR_ACCESS_KEY>
+     # AWS Secret Access Key: <YOUR_SECRET_KEY>
+     # Default region name: ap-southeast-1
+     # Default output format: json
+     ```
+
+2. **Git CLI:**
+   - Version control tool for cloning project repositories, storing automation scripts, and CloudFormation templates.
+   - Verify with: `git --version`
+
+3. **Python (v3.x):**
+   - Runtime environment for automation scripts, API testing, and running the AWS SDK (`boto3`).
+   - Verify with: `python --version` or `python3 --version`
+
+4. **Node.js & npm + pnpm:**
+   - JavaScript runtime and package managers for executing CLI tools, AWS CDK, or web applications.
+   - Verify with: `node -v`, `npm -v`, `pnpm -v`
+
+5. **Docker Desktop:**
+   - Container virtualization engine on your local machine for packaging applications, testing containerized microservices, or local service emulation before cloud deployment.
+   - Verify with: `docker --version`
+
+---
+
+### 2. IAM Roles Configuration for Services (Principle of Least Privilege)
+
+To ensure secure operations for the **CodExecute** platform following the **Principle of Least Privilege**, each Serverless component is assigned a dedicated **IAM Execution Role** with tightly scoped permission policies aligned strictly to its operational requirements:
+
+---
+
+#### 2.1. IAM Role for Lambda API Handler (`CodExecuteAPILambdaRole`)
+- **Attached Service:** Lambda Function `codeexecute-api` (FastAPI REST Server).
+- **Service Principal (Trust Policy):** `lambda.amazonaws.com`
+- **Granted Permissions:**
+  1. **CloudWatch Logs:** Allows writing application logs (`logs:CreateLogGroup`, `logs:CreateLogStream`, `logs:PutLogEvents`).
+  2. **Amazon DynamoDB:** Allows CRUD access to users, problemsets, and submission records across system DynamoDB tables (`dynamodb:GetItem`, `dynamodb:PutItem`, `dynamodb:UpdateItem`, `dynamodb:DeleteItem`, `dynamodb:Query`, `dynamodb:Scan`).
+  3. **Amazon S3:** Allows read/write access to `codeexecute-user-media/*` and read-only access to `codeexecute-testcases/*`.
+  4. **Amazon SQS:** Allows dispatching submission tasks into the asynchronous queue `codexecute-submissions-queue` (`sqs:SendMessage`).
+
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "VisualEditor0",
+            "Sid": "CloudWatchLogging",
             "Effect": "Allow",
             "Action": [
-                "cloudformation:*",
-                "cloudwatch:*",
-                "ec2:AcceptTransitGatewayPeeringAttachment",
-                "ec2:AcceptTransitGatewayVpcAttachment",
-                "ec2:AllocateAddress",
-                "ec2:AssociateAddress",
-                "ec2:AssociateIamInstanceProfile",
-                "ec2:AssociateRouteTable",
-                "ec2:AssociateSubnetCidrBlock",
-                "ec2:AssociateTransitGatewayRouteTable",
-                "ec2:AssociateVpcCidrBlock",
-                "ec2:AttachInternetGateway",
-                "ec2:AttachNetworkInterface",
-                "ec2:AttachVolume",
-                "ec2:AttachVpnGateway",
-                "ec2:AuthorizeSecurityGroupEgress",
-                "ec2:AuthorizeSecurityGroupIngress",
-                "ec2:CreateClientVpnEndpoint",
-                "ec2:CreateClientVpnRoute",
-                "ec2:CreateCustomerGateway",
-                "ec2:CreateDhcpOptions",
-                "ec2:CreateFlowLogs",
-                "ec2:CreateInternetGateway",
-                "ec2:CreateLaunchTemplate",
-                "ec2:CreateNetworkAcl",
-                "ec2:CreateNetworkInterface",
-                "ec2:CreateNetworkInterfacePermission",
-                "ec2:CreateRoute",
-                "ec2:CreateRouteTable",
-                "ec2:CreateSecurityGroup",
-                "ec2:CreateSubnet",
-                "ec2:CreateSubnetCidrReservation",
-                "ec2:CreateTags",
-                "ec2:CreateTransitGateway",
-                "ec2:CreateTransitGatewayPeeringAttachment",
-                "ec2:CreateTransitGatewayPrefixListReference",
-                "ec2:CreateTransitGatewayRoute",
-                "ec2:CreateTransitGatewayRouteTable",
-                "ec2:CreateTransitGatewayVpcAttachment",
-                "ec2:CreateVpc",
-                "ec2:CreateVpcEndpoint",
-                "ec2:CreateVpcEndpointConnectionNotification",
-                "ec2:CreateVpcEndpointServiceConfiguration",
-                "ec2:CreateVpnConnection",
-                "ec2:CreateVpnConnectionRoute",
-                "ec2:CreateVpnGateway",
-                "ec2:DeleteCustomerGateway",
-                "ec2:DeleteFlowLogs",
-                "ec2:DeleteInternetGateway",
-                "ec2:DeleteNetworkInterface",
-                "ec2:DeleteNetworkInterfacePermission",
-                "ec2:DeleteRoute",
-                "ec2:DeleteRouteTable",
-                "ec2:DeleteSecurityGroup",
-                "ec2:DeleteSubnet",
-                "ec2:DeleteSubnetCidrReservation",
-                "ec2:DeleteTags",
-                "ec2:DeleteTransitGateway",
-                "ec2:DeleteTransitGatewayPeeringAttachment",
-                "ec2:DeleteTransitGatewayPrefixListReference",
-                "ec2:DeleteTransitGatewayRoute",
-                "ec2:DeleteTransitGatewayRouteTable",
-                "ec2:DeleteTransitGatewayVpcAttachment",
-                "ec2:DeleteVpc",
-                "ec2:DeleteVpcEndpoints",
-                "ec2:DeleteVpcEndpointServiceConfigurations",
-                "ec2:DeleteVpnConnection",
-                "ec2:DeleteVpnConnectionRoute",
-                "ec2:Describe*",
-                "ec2:DetachInternetGateway",
-                "ec2:DisassociateAddress",
-                "ec2:DisassociateRouteTable",
-                "ec2:GetLaunchTemplateData",
-                "ec2:GetTransitGatewayAttachmentPropagations",
-                "ec2:ModifyInstanceAttribute",
-                "ec2:ModifySecurityGroupRules",
-                "ec2:ModifyTransitGatewayVpcAttachment",
-                "ec2:ModifyVpcAttribute",
-                "ec2:ModifyVpcEndpoint",
-                "ec2:ReleaseAddress",
-                "ec2:ReplaceRoute",
-                "ec2:RevokeSecurityGroupEgress",
-                "ec2:RevokeSecurityGroupIngress",
-                "ec2:RunInstances",
-                "ec2:StartInstances",
-                "ec2:StopInstances",
-                "ec2:UpdateSecurityGroupRuleDescriptionsEgress",
-                "ec2:UpdateSecurityGroupRuleDescriptionsIngress",
-                "iam:AddRoleToInstanceProfile",
-                "iam:AttachRolePolicy",
-                "iam:CreateInstanceProfile",
-                "iam:CreatePolicy",
-                "iam:CreateRole",
-                "iam:DeleteInstanceProfile",
-                "iam:DeletePolicy",
-                "iam:DeleteRole",
-                "iam:DeleteRolePolicy",
-                "iam:DetachRolePolicy",
-                "iam:GetInstanceProfile",
-                "iam:GetPolicy",
-                "iam:GetRole",
-                "iam:GetRolePolicy",
-                "iam:ListPolicyVersions",
-                "iam:ListRoles",
-                "iam:PassRole",
-                "iam:PutRolePolicy",
-                "iam:RemoveRoleFromInstanceProfile",
-                "lambda:CreateFunction",
-                "lambda:DeleteFunction",
-                "lambda:DeleteLayerVersion",
-                "lambda:GetFunction",
-                "lambda:GetLayerVersion",
-                "lambda:InvokeFunction",
-                "lambda:PublishLayerVersion",
                 "logs:CreateLogGroup",
-                "logs:DeleteLogGroup",
-                "logs:DescribeLogGroups",
-                "logs:PutRetentionPolicy",
-                "route53:ChangeTagsForResource",
-                "route53:CreateHealthCheck",
-                "route53:CreateHostedZone",
-                "route53:CreateTrafficPolicy",
-                "route53:DeleteHostedZone",
-                "route53:DisassociateVPCFromHostedZone",
-                "route53:GetHostedZone",
-                "route53:ListHostedZones",
-                "route53domains:ListDomains",
-                "route53domains:ListOperations",
-                "route53domains:ListTagsForDomain",
-                "route53resolver:AssociateResolverEndpointIpAddress",
-                "route53resolver:AssociateResolverRule",
-                "route53resolver:CreateResolverEndpoint",
-                "route53resolver:CreateResolverRule",
-                "route53resolver:DeleteResolverEndpoint",
-                "route53resolver:DeleteResolverRule",
-                "route53resolver:DisassociateResolverEndpointIpAddress",
-                "route53resolver:DisassociateResolverRule",
-                "route53resolver:GetResolverEndpoint",
-                "route53resolver:GetResolverRule",
-                "route53resolver:ListResolverEndpointIpAddresses",
-                "route53resolver:ListResolverEndpoints",
-                "route53resolver:ListResolverRuleAssociations",
-                "route53resolver:ListResolverRules",
-                "route53resolver:ListTagsForResource",
-                "route53resolver:UpdateResolverEndpoint",
-                "route53resolver:UpdateResolverRule",
-                "s3:AbortMultipartUpload",
-                "s3:CreateBucket",
-                "s3:DeleteBucket",
-                "s3:DeleteObject",
-                "s3:GetAccountPublicAccessBlock",
-                "s3:GetBucketAcl",
-                "s3:GetBucketOwnershipControls",
-                "s3:GetBucketPolicy",
-                "s3:GetBucketPolicyStatus",
-                "s3:GetBucketPublicAccessBlock",
-                "s3:GetObject",
-                "s3:GetObjectVersion",
-                "s3:GetBucketVersioning",
-                "s3:ListAccessPoints",
-                "s3:ListAccessPointsForObjectLambda",
-                "s3:ListAllMyBuckets",
-                "s3:ListBucket",
-                "s3:ListBucketMultipartUploads",
-                "s3:ListBucketVersions",
-                "s3:ListJobs",
-                "s3:ListMultipartUploadParts",
-                "s3:ListMultiRegionAccessPoints",
-                "s3:ListStorageLensConfigurations",
-                "s3:PutAccountPublicAccessBlock",
-                "s3:PutBucketAcl",
-                "s3:PutBucketPolicy",
-                "s3:PutBucketPublicAccessBlock",
-                "s3:PutObject",
-                "secretsmanager:CreateSecret",
-                "secretsmanager:DeleteSecret",
-                "secretsmanager:DescribeSecret",
-                "secretsmanager:GetSecretValue",
-                "secretsmanager:ListSecrets",
-                "secretsmanager:ListSecretVersionIds",
-                "secretsmanager:PutResourcePolicy",
-                "secretsmanager:TagResource",
-                "secretsmanager:UpdateSecret",
-                "sns:ListTopics",
-                "ssm:DescribeInstanceProperties",
-                "ssm:DescribeSessions",
-                "ssm:GetConnectionStatus",
-                "ssm:GetParameters",
-                "ssm:ListAssociations",
-                "ssm:ResumeSession",
-                "ssm:StartSession",
-                "ssm:TerminateSession"
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
             ],
-            "Resource": "*"
+            "Resource": "arn:aws:logs:ap-southeast-1:*:log-group:/aws/lambda/codeexecute-api:*"
+        },
+        {
+            "Sid": "DynamoDBAccess",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:Query",
+                "dynamodb:Scan"
+            ],
+            "Resource": "arn:aws:dynamodb:ap-southeast-1:*:table/*"
+        },
+        {
+            "Sid": "S3BucketAccess",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::codeexecute-user-media/*",
+                "arn:aws:s3:::codeexecute-testcases/*"
+            ]
+        },
+        {
+            "Sid": "SQSSendMessage",
+            "Effect": "Allow",
+            "Action": "sqs:SendMessage",
+            "Resource": "arn:aws:sqs:ap-southeast-1:*:codexecute-submissions-queue"
         }
     ]
 }
-
 ```
 
-#### Provision resources using CloudFormation
+---
 
-In this lab, we will use **N.Virginia region (us-east-1)**.
+#### 2.2. IAM Role for Lambda Sandbox Worker (`CodExecuteWorkerLambdaRole`)
+- **Attached Service:** Lambda Function `codeexecute-worker` (Async Code Evaluator Sandbox).
+- **Service Principal (Trust Policy):** `lambda.amazonaws.com`
+- **Granted Permissions:**
+  1. **CloudWatch Logs:** Allows logging compilation outputs and sandbox execution logs (`logs:CreateLogGroup`, `logs:CreateLogStream`, `logs:PutLogEvents`).
+  2. **Amazon SQS:** Allows polling and deleting submission jobs from SQS Queue (`sqs:ReceiveMessage`, `sqs:DeleteMessage`, `sqs:GetQueueAttributes`).
+  3. **Amazon S3:** Read-only access to testcase datasets `codeexecute-testcases/*` (`s3:GetObject`).
+  4. **Amazon DynamoDB:** Reads problemset/submission metadata and updates evaluation verdicts (Status, Execution Time, Memory, Output) on `Submissions` and `TestCases` tables (`dynamodb:GetItem`, `dynamodb:UpdateItem`).
 
-To prepare the workshop environment, deploy this **CloudFormation Template** (click link): [PrivateLinkWorkshop ](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.us-east-1.amazonaws.com/reinvent-endpoints-builders-session/Nested.yaml&stackName=PLCloudSetup). Accept all of the defaults when deploying the template. 
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CloudWatchLogging",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:ap-southeast-1:*:log-group:/aws/lambda/codeexecute-worker:*"
+        },
+        {
+            "Sid": "SQSPollingAccess",
+            "Effect": "Allow",
+            "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes"
+            ],
+            "Resource": "arn:aws:sqs:ap-southeast-1:*:codexecute-submissions-queue"
+        },
+        {
+            "Sid": "S3TestcasesReadAccess",
+            "Effect": "Allow",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::codeexecute-testcases/*"
+        },
+        {
+            "Sid": "DynamoDBSubmissionsUpdate",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:PutItem"
+            ],
+            "Resource": [
+                "arn:aws:dynamodb:ap-southeast-1:*:table/Submissions",
+                "arn:aws:dynamodb:ap-southeast-1:*:table/TestCases"
+            ]
+        }
+    ]
+}
+```
 
-![create stack](/images/5-Workshop/5.2-Prerequisite/create-stack1.png)
+---
 
-+ Tick 2 acknowledgement boxes
-+ Choose **Create stack**
+#### 2.3. IAM Role for API Gateway CloudWatch Logging (`CodExecuteAPIGatewayRole`)
+- **Attached Service:** Amazon API Gateway.
+- **Service Principal (Trust Policy):** `apigateway.amazonaws.com`
+- **Granted Permissions:** Logs API access traffic and preflight CORS errors to CloudWatch (`logs:CreateLogGroup`, `logs:CreateLogStream`, `logs:DescribeLogGroups`, `logs:PutLogEvents`).
 
-![create stack](/images/5-Workshop/5.2-Prerequisite/create-stack2.png)
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "APIGatewayCloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogGroups",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:ap-southeast-1:*:*"
+        }
+    ]
+}
+```
 
-The **ClouddFormation** deployment requires about 15 minutes to complete.
+---
 
-![complete](/images/5-Workshop/5.2-Prerequisite/complete.png)
+### 3. Repository Setup & Local Development Execution
 
-+ **2 VPCs** have been created
+Before proceeding with AWS Cloud deployment labs, clone the primary **CodExecute** repository and run the local development environment:
 
-![vpcs](/images/5-Workshop/5.2-Prerequisite/vpcs.png)
+#### Step 3.1: Clone Project Repository
 
-+ **3 EC2s** have been created
+Open your terminal and execute the Git clone command:
 
-![EC2](/images/5-Workshop/5.2-Prerequisite/ec2.png)
+```bash
+git clone https://github.com/phuvi301/CodExecute
+cd CodExecute
+```
+
+#### Step 3.2: Launch Local Frontend (React + Vite)
+
+1. Navigate to the `fe` directory and install project dependencies using `pnpm`:
+   ```bash
+   cd fe
+   pnpm install
+   ```
+
+2. Start the local development server:
+   ```bash
+   pnpm run dev
+   ```
+
+   The Frontend application will run locally at: `http://localhost:3000`.
+   
+
+#### Step 3.3: Launch Local Backend API (FastAPI)
+
+1. Navigate to the `be` directory and create a Python virtual environment:
+   
+   ##### Linux / macOS:
+   ```bash
+   cd be
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+   ##### Windows (PowerShell):
+   ```powershell
+   cd be
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
+
+2. Install backend dependencies and launch the FastAPI server:
+   ```bash
+   pip install -r requirements.txt
+   fastapi dev
+   ```
+   The Backend REST API will start and accept incoming requests.
+
+---
+
+### 4. Overview of Provisioned AWS Serverless Resources
+
+Summary of Serverless infrastructure components provisioned throughout this workshop:
+
+| Infrastructure Component | AWS Resource Name | Role & Responsibility |
+| :--- | :--- | :--- |
+| **Amazon S3 (3 Buckets)** | `codexecute-prod-frontend`<br>`codeexecute-testcases`<br>`codeexecute-user-media` | Stores static web assets, testcase datasets (Input/Output), and user media. |
+| **Amazon DynamoDB (8 Tables)** | `Users`, `Problems`, `Submissions`, `TestCases`, `Posts`, `Notifications`, `UserFollows`, `Solutions` | Stores user profiles, problemsets, submission logs, social posts, and solution code. |
+| **Amazon SQS (Queue)** | `codexecute-submissions-queue` | Asynchronous submission buffer queue absorbing traffic spikes. |
+| **AWS Lambda (2 Functions)** | `codeexecute-api`<br>`codeexecute-worker` | - `codeexecute-api`: REST API backend server (FastAPI).<br>- `codeexecute-worker`: Multi-language code evaluation sandbox. |
+| **Amazon API Gateway** | `codeexecute-api-gateway` | Unified HTTP API Gateway entrypoint. |
+| **Amazon CloudFront** | CDN Distribution | Global edge content delivery network and HTTPS Reverse Proxy. |
+
+After configuring local environments and verifying `aws configure`, you are ready to begin hands-on Cloud deployment for **CodExecute**!
