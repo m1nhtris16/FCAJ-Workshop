@@ -129,10 +129,10 @@ The **AWS Agentic AI Build Week Demo Day (July 25, 2026)** was an inspiring and 
 
 #### Participation Evidence Photos
 
-![Event 3 Evidence 1](/images/4-EventParticipated/4.3-Event3/event3_evidence1.jpg)
+![Event 3 Evidence 1](/images/event3_evidence1.jpg)
 *Photo 1: Selfie at the event*  
 
-![Event 3 Evidence 2](/images/4-EventParticipated/4.3-Event3/event3_evidence2.jpg)
+![Event 3 Evidence 2](/images/event3_evidence2.jpg)
 *Photo 2: Event showcase & presentation*
 
 
